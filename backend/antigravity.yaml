@@ -1,0 +1,9 @@
+runtime: nodejs20
+build_command: npm run build
+start_command: npm start
+env:
+  NODE_ENV: production
+health_check:
+  path: /health
+  interval: 30s
+  timeout: 5s
