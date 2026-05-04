@@ -70,7 +70,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const ADMIN1_FILE = path.join(__dirname, '../../data/admin1.geojson');
+const ADMIN1_FILE = path.join(__dirname, '../../data/admin1_simplified.geojson');
 
 let admin1DataCache: any = null;
 const getAdmin1Data = () => {
