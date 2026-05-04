@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useUserStore } from '../../store/useUserStore';
+import { useAppStore } from '../../store/useAppStore';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Camera, Loader2 } from 'lucide-react';
@@ -8,6 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { AutocompleteInput } from '../ui/AutocompleteInput';
 import { Country, State } from 'country-state-city';
 import { useMemo } from 'react';
+import { toast } from 'sonner';
+import { fetchWeather } from '../../api';
 
 const compressImage = (file: File): Promise<File> => {
   return new Promise((resolve) => {
@@ -64,6 +67,7 @@ interface ProfileModalProps {
 
 export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
   const session = useUserStore((state) => state.session);
+  const addLocalAlert = useAppStore((state) => state.addLocalAlert);
   const user = session?.user;
   const metadata = user?.user_metadata || {};
 
@@ -149,6 +153,43 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
       if (error) throw error;
       
+      toast.success("Profile saved successfully!", {
+        description: `Location updated to ${region ? region + ', ' : ''}${country || 'Unknown'}`
+      });
+      
+      const queryLoc = region || country;
+      if (queryLoc) {
+        try {
+          const weather = await fetchWeather(`${queryLoc}${country && region ? `, ${country}` : ''}`);
+          if (weather && weather.temp !== undefined) {
+            const temp = Math.round(weather.temp);
+            const isHot = temp > 25;
+            const isCold = temp < 10;
+            const jokes = [
+              isHot ? "It's so hot the polar bears are buying ACs! 🐻‍❄️" : (isCold ? "So cold my coffee froze mid-air! ☕❄️" : "Perfect weather to stay inside and code. 💻"),
+              "Why did the cloud stay at home? Because it was feeling a little under the weather! ☁️",
+              "What falls but never breaks? The temperature tonight! 📉"
+            ];
+            
+            const alert = {
+              id: `local-alert-${Date.now()}`,
+              alert_type: `${weather.condition} (${temp}°C)`,
+              severity: temp > 35 ? 'Critical' : (temp > 30 || temp < 0 ? 'High' : 'Medium'),
+              source_data: { 
+                OpenWeatherMap: jokes[Math.floor(Math.random() * jokes.length)],
+                TomorrowIO: `Feels like ${Math.round(weather.feels_like)}°C`, 
+                NOAA: weather.description 
+              },
+              created_at: new Date().toISOString(),
+              confidence_score: 0.99
+            };
+            addLocalAlert(alert);
+          }
+        } catch (e) {
+          console.error('Weather fetch failed', e);
+        }
+      }
+
       // We don't need to manually update state if Supabase triggers an onAuthStateChange, 
       // but to be safe and snappy we could just close the modal.
       onOpenChange(false);
