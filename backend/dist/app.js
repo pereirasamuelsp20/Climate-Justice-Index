@@ -13,18 +13,15 @@ import { authRouter } from './routes/auth.routes.js';
 export const app = express();
 // Security and utility middlewares
 app.use(helmet());
-// Support multiple origins: comma-separated FRONTEND_URL for both local dev and production
+// Support multiple origins and dynamic vercel preview URLs
 const allowedOrigins = env.FRONTEND_URL.split(',').map(s => s.trim());
 app.use(cors({
-    origin: (origin, callback) => {
-        // Allow requests with no origin (mobile apps, curl, server-to-server)
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        }
-        else {
-            callback(null, false);
-        }
-    },
+    origin: [
+        ...allowedOrigins,
+        ...allowedOrigins.map(o => o.replace(/\/$/, '')), // Handle trailing slashes
+        /\.vercel\.app$/, // Allow all Vercel preview deployments
+        /localhost:/ // Allow local development
+    ],
     credentials: true,
 }));
 app.use(express.json());
