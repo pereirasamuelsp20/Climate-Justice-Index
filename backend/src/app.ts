@@ -10,6 +10,7 @@ import { errorHandler } from './middlewares/error.middleware.js';
 import { climateRouter } from './routes/climate.routes.js';
 import { userRouter } from './routes/user.routes.js';
 import { alertsRouter } from './routes/alerts.routes.js';
+import { authRouter } from './routes/auth.routes.js';
 
 export const app = express();
 
@@ -37,6 +38,7 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/climate', climateRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/alerts', alertsRouter);

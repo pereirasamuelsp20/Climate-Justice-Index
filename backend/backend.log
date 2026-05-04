@@ -1,0 +1,1914 @@
+
+> backend@1.0.0 start
+> node dist/server.js
+
+◇ injected env (7) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[2026-05-04 19:12:23.971 +0530] [32mINFO[39m (32107): [36mServer listening on port 5001 in development mode.[39m
+[2026-05-04 19:12:23.999 +0530] [32mINFO[39m (32107): [36mBackground cron services initialized.[39m
+[2026-05-04 19:23:45.793 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 1,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=India",
+      "query": {
+        "location": "India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50749
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "105",
+        "etag": "W/\"69-Csa6UwShor3k7pfceVIl1W9j9D0\""
+      }
+    }
+    [35mresponseTime[39m: 629
+[2026-05-04 19:23:45.960 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 4,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=India",
+      "query": {
+        "location": "India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"69-Csa6UwShor3k7pfceVIl1W9j9D0\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50755
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "96",
+        "ratelimit-reset": "60",
+        "etag": "W/\"69-Csa6UwShor3k7pfceVIl1W9j9D0\""
+      }
+    }
+    [35mresponseTime[39m: 164
+[2026-05-04 19:23:47.173 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 3,
+      "method": "GET",
+      "url": "/api/v1/climate/countries",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50751
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "97",
+        "ratelimit-reset": "60",
+        "etag": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      }
+    }
+    [35mresponseTime[39m: 1981
+[2026-05-04 19:23:47.239 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 2,
+      "method": "GET",
+      "url": "/api/v1/alerts",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50750
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "60",
+        "etag": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      }
+    }
+    [35mresponseTime[39m: 2049
+[2026-05-04 19:30:00.010 +0530] [32mINFO[39m (32107): [36mRunning weather aggregation cron...[39m
+[2026-05-04 19:31:53.756 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 7,
+      "method": "GET",
+      "url": "/api/v1/climate/countries",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50897
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "97",
+        "ratelimit-reset": "60",
+        "etag": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      }
+    }
+    [35mresponseTime[39m: 1
+[2026-05-04 19:31:54.282 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 5,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50895
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "104",
+        "etag": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      }
+    }
+    [35mresponseTime[39m: 530
+[2026-05-04 19:31:54.454 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 8,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50901
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "96",
+        "ratelimit-reset": "60",
+        "etag": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      }
+    }
+    [35mresponseTime[39m: 167
+[2026-05-04 19:31:56.013 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 6,
+      "method": "GET",
+      "url": "/api/v1/alerts",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTAzNjEwLCJpYXQiOjE3Nzc5MDAwMTAsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.97ccz5-Dl6xNtg7VJhRESecJr4hRFdNOdtDDZ0lNMNltUEXjC7oPOrfQoL1jbO5JHtiEATuxswPIuySZUw9BDA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50896
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "60",
+        "etag": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      }
+    }
+    [35mresponseTime[39m: 2259
+[2026-05-04 19:47:39.845 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 11,
+      "method": "GET",
+      "url": "/api/v1/climate/countries",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3ODU4LCJpYXQiOjE3Nzc5MDQyNTgsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.F37SUMNzrOC3Y9xWAEhMHaKpD5xtTgAtTixewLj2iuny_veVXp79jZg2HX17J_7ANhVCcYTfMdF4yLkoU965xw",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51119
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "97",
+        "ratelimit-reset": "60",
+        "etag": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      }
+    }
+    [35mresponseTime[39m: 1046
+[2026-05-04 19:47:39.973 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 9,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3ODU4LCJpYXQiOjE3Nzc5MDQyNTgsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.F37SUMNzrOC3Y9xWAEhMHaKpD5xtTgAtTixewLj2iuny_veVXp79jZg2HX17J_7ANhVCcYTfMdF4yLkoU965xw",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51117
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "etag": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      }
+    }
+    [35mresponseTime[39m: 1181
+[2026-05-04 19:47:40.141 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 12,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3ODU4LCJpYXQiOjE3Nzc5MDQyNTgsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.F37SUMNzrOC3Y9xWAEhMHaKpD5xtTgAtTixewLj2iuny_veVXp79jZg2HX17J_7ANhVCcYTfMdF4yLkoU965xw",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51123
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "96",
+        "ratelimit-reset": "59",
+        "etag": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      }
+    }
+    [35mresponseTime[39m: 165
+[2026-05-04 19:47:40.338 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 10,
+      "method": "GET",
+      "url": "/api/v1/alerts",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3ODU4LCJpYXQiOjE3Nzc5MDQyNTgsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.F37SUMNzrOC3Y9xWAEhMHaKpD5xtTgAtTixewLj2iuny_veVXp79jZg2HX17J_7ANhVCcYTfMdF4yLkoU965xw",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51118
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "60",
+        "etag": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      }
+    }
+    [35mresponseTime[39m: 1540
+[2026-05-04 19:47:46.243 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 13,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3ODU4LCJpYXQiOjE3Nzc5MDQyNTgsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwMDAxMH1dLCJzZXNzaW9uX2lkIjoiOGJiZDA1NmMtM2M4YS00ZjRiLWFkZTEtMzliNWI3MzNkYWI5IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.F37SUMNzrOC3Y9xWAEhMHaKpD5xtTgAtTixewLj2iuny_veVXp79jZg2HX17J_7ANhVCcYTfMdF4yLkoU965xw",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51125
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "95",
+        "ratelimit-reset": "54",
+        "etag": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      }
+    }
+    [35mresponseTime[39m: 508
+[2026-05-04 19:50:01.810 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 14,
+      "method": "GET",
+      "url": "/api/v1/climate/initiatives",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3OTIzLCJpYXQiOjE3Nzc5MDQzMjMsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNDMyM31dLCJzZXNzaW9uX2lkIjoiMmVhOTg2MGEtMzRmNy00MjVkLThhZDktNDAyZjg5ZGU2ZjhkIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.Vj6RxtjNil6SA29KhTnQB59aG4QCXVcEKHYTLI5xZOxIAZZ2SK06v7GX8__SqfNPTsosZCUJ46zEfK7GuEDBvg",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"261e-doTJO1O916KrirzjyjiY4FjjCEY\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51158
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "9758",
+        "etag": "W/\"261e-PPh1ZStysSWIVV5E866MBzqje28\""
+      }
+    }
+    [35mresponseTime[39m: 4
+[2026-05-04 19:51:03.073 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 15,
+      "method": "GET",
+      "url": "/api/v1/climate/aqi",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3OTIzLCJpYXQiOjE3Nzc5MDQzMjMsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNDMyM31dLCJzZXNzaW9uX2lkIjoiMmVhOTg2MGEtMzRmNy00MjVkLThhZDktNDAyZjg5ZGU2ZjhkIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.Vj6RxtjNil6SA29KhTnQB59aG4QCXVcEKHYTLI5xZOxIAZZ2SK06v7GX8__SqfNPTsosZCUJ46zEfK7GuEDBvg",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"f673-GqhadHT6Re6DPUC10IR+BZv4mgI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51178
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "1",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "63091",
+        "etag": "W/\"f673-QaWnDmH0U0+EcEr76kwLSt9lNSQ\""
+      }
+    }
+    [35mresponseTime[39m: 1595
+[2026-05-04 19:51:14.554 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 16,
+      "method": "GET",
+      "url": "/api/v1/climate/countries/RU/regions",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3OTIzLCJpYXQiOjE3Nzc5MDQzMjMsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNDMyM31dLCJzZXNzaW9uX2lkIjoiMmVhOTg2MGEtMzRmNy00MjVkLThhZDktNDAyZjg5ZGU2ZjhkIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.Vj6RxtjNil6SA29KhTnQB59aG4QCXVcEKHYTLI5xZOxIAZZ2SK06v7GX8__SqfNPTsosZCUJ46zEfK7GuEDBvg",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"31074d-fi0s3/2Tk5tE5la9M67ejhNMUB4\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51378
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "3213173",
+        "etag": "W/\"310775-xd6WnVlUZZazKzXmthgg2+NOIYo\""
+      }
+    }
+    [35mresponseTime[39m: 2181
+[2026-05-04 19:52:12.629 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 17,
+      "method": "GET",
+      "url": "/api/v1/climate/countries/CA/regions",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA3OTIzLCJpYXQiOjE3Nzc5MDQzMjMsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNDMyM31dLCJzZXNzaW9uX2lkIjoiMmVhOTg2MGEtMzRmNy00MjVkLThhZDktNDAyZjg5ZGU2ZjhkIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.Vj6RxtjNil6SA29KhTnQB59aG4QCXVcEKHYTLI5xZOxIAZZ2SK06v7GX8__SqfNPTsosZCUJ46zEfK7GuEDBvg",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1b9c4c-vAwI/VqZXjDXmH2l+yiqI6bQDpM\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51391
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "1",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1809487",
+        "etag": "W/\"1b9c4f-/ZtEzGWM5OxAPyh1Y6KW/mn8BE8\""
+      }
+    }
+    [35mresponseTime[39m: 768
+[2026-05-04 20:00:00.011 +0530] [32mINFO[39m (32107): [36mRunning weather aggregation cron...[39m
+[2026-05-04 20:14:55.298 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 20,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-HygQjBsCtluGxSHlz0cZziG0CRk\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51726
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "97",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "104",
+        "etag": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      }
+    }
+    [35mresponseTime[39m: 666
+[2026-05-04 20:14:55.484 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 21,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51731
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "96",
+        "ratelimit-reset": "60",
+        "etag": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      }
+    }
+    [35mresponseTime[39m: 182
+[2026-05-04 20:14:55.666 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 19,
+      "method": "GET",
+      "url": "/api/v1/climate/countries",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51725
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "60",
+        "etag": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      }
+    }
+    [35mresponseTime[39m: 1037
+[2026-05-04 20:14:56.510 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 18,
+      "method": "GET",
+      "url": "/api/v1/alerts",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51724
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "etag": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      }
+    }
+    [35mresponseTime[39m: 1886
+[2026-05-04 20:15:14.359 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 22,
+      "method": "GET",
+      "url": "/api/v1/climate/aqi",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"f673-QaWnDmH0U0+EcEr76kwLSt9lNSQ\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51733
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "95",
+        "ratelimit-reset": "42",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "63097",
+        "etag": "W/\"f679-Fw8vKzCj2gX6S4o+wsOOPfJ0ZnI\""
+      }
+    }
+    [35mresponseTime[39m: 1488
+[2026-05-04 20:15:31.710 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 23,
+      "method": "GET",
+      "url": "/api/v1/climate/countries/RU/regions",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"310775-xd6WnVlUZZazKzXmthgg2+NOIYo\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51934
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "94",
+        "ratelimit-reset": "26",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "3213171",
+        "etag": "W/\"310773-fyUArC0EPUsO1Kt2MuP0zrVFmIw\""
+      }
+    }
+    [35mresponseTime[39m: 2245
+[2026-05-04 20:16:36.436 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 24,
+      "method": "GET",
+      "url": "/api/v1/climate/initiatives",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"261e-PPh1ZStysSWIVV5E866MBzqje28\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51953
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "9758",
+        "etag": "W/\"261e-29RPDWXkUCZenJy49JcENaS4efw\""
+      }
+    }
+    [35mresponseTime[39m: 2
+[2026-05-04 20:18:40.563 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 27,
+      "method": "GET",
+      "url": "/api/v1/climate/countries",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51989
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "97",
+        "ratelimit-reset": "60",
+        "etag": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      }
+    }
+    [35mresponseTime[39m: 1
+[2026-05-04 20:18:41.067 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 26,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51988
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "60",
+        "etag": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      }
+    }
+    [35mresponseTime[39m: 507
+[2026-05-04 20:18:41.238 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 28,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51992
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "96",
+        "ratelimit-reset": "60",
+        "etag": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      }
+    }
+    [35mresponseTime[39m: 166
+[2026-05-04 20:18:42.387 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 25,
+      "method": "GET",
+      "url": "/api/v1/alerts",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51987
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "etag": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+      }
+    }
+    [35mresponseTime[39m: 1833
+[2026-05-04 20:20:45.166 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 29,
+      "method": "GET",
+      "url": "/api/v1/climate/initiatives",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"261e-29RPDWXkUCZenJy49JcENaS4efw\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52021
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "etag": "W/\"261e-29RPDWXkUCZenJy49JcENaS4efw\""
+      }
+    }
+    [35mresponseTime[39m: 2
+[2026-05-04 20:22:00.175 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 30,
+      "method": "GET",
+      "url": "/api/v1/climate/aqi",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"f679-Fw8vKzCj2gX6S4o+wsOOPfJ0ZnI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52047
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "etag": "W/\"f679-Fw8vKzCj2gX6S4o+wsOOPfJ0ZnI\""
+      }
+    }
+    [35mresponseTime[39m: 7
+[2026-05-04 20:22:38.998 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 31,
+      "method": "GET",
+      "url": "/api/v1/climate/countries/CN/regions",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52053
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "22",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1289544",
+        "etag": "W/\"13ad48-DO0QcenMpmWmo4DN7bUEHVC3gss\""
+      }
+    }
+    [35mresponseTime[39m: 432
+[2026-05-04 20:23:33.106 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 32,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=moscow%2C%20Russia",
+      "query": {
+        "location": "moscow, Russia"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52062
+    }
+    [35mres[39m: {
+      "statusCode": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "106",
+        "etag": "W/\"6a-MvG7cxTEQAtUPA8YTM/AZrUI7YE\""
+      }
+    }
+    [35mresponseTime[39m: 619
+[2026-05-04 20:24:02.527 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 33,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=moscow%2C%20Russia",
+      "query": {
+        "location": "moscow, Russia"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"6a-MvG7cxTEQAtUPA8YTM/AZrUI7YE\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52077
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "98",
+        "ratelimit-reset": "31",
+        "etag": "W/\"6a-MvG7cxTEQAtUPA8YTM/AZrUI7YE\""
+      }
+    }
+    [35mresponseTime[39m: 517
+[2026-05-04 20:24:26.680 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 34,
+      "method": "GET",
+      "url": "/api/v1/climate/weather?location=Maharashtra%2C%20India",
+      "query": {
+        "location": "Maharashtra, India"
+      },
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52082
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "97",
+        "ratelimit-reset": "7",
+        "etag": "W/\"68-Hf/+TEDtx1M9K10C2AGxm4skKjw\""
+      }
+    }
+    [35mresponseTime[39m: 525
+[2026-05-04 20:24:32.879 +0530] [32mINFO[39m (32107): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 35,
+      "method": "GET",
+      "url": "/api/v1/climate/countries",
+      "query": {},
+      "params": {},
+      "headers": {
+        "host": "127.0.0.1:5001",
+        "connection": "close",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "authorization": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjUyNDQyNDQwLWQwYjQtNGJiOS04ZDM0LTllMzIzOWYwMmRmOSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3FybXZlZGFhbnRraHF2d2FzY2ZyLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc3OTA5NDk0LCJpYXQiOjE3Nzc5MDU4OTQsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9xcm12ZWRhYW50a2hxdndhc2Nmci5zdXBhYmFzZS5jby9zdG9yYWdlL3YxL29iamVjdC9wdWJsaWMvYXZhdGFycy85OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGItMC45Mzg3OTg5MjQwNzg1Mzg4LmpwZyIsImNvdW50cnkiOiJJbmRpYSIsImVtYWlsIjoicGVyZWlyYXNhbXVlbHNwMjBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJTYW11ZWwgUGVyZWlyYSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwicmVnaW9uIjoiTWFoYXJhc2h0cmEiLCJzdWIiOiI5OWMzMGE3MC0zZTQ3LTRlYzItOGYyNC0zNzYwNDZmNWE3ZGIifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NzkwNTg5NH1dLCJzZXNzaW9uX2lkIjoiOTQ0OGE2YTctOWZmNi00NzQyLWE2OTYtYWIxZGVmZjBkOGViIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.1lRxYvjWy6lgxaVg1e7e6Wb9-52g75ihEG-xBVXMnoL3SIQsfJ0emRCcY15gtiBml_fb_wsiurSbBpO2UjA6sA",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-dest": "empty",
+        "referer": "http://localhost:5174/",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,mr;q=0.6,hi;q=0.5",
+        "cookie": "ajs_anonymous_id=e8809a40-a8c4-4f28-95ee-2b01d866442d",
+        "if-none-match": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52085
+    }
+    [35mres[39m: {
+      "statusCode": 304,
+      "headers": {
+        "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin",
+        "origin-agent-cluster": "?1",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "access-control-allow-origin": "http://localhost:5173",
+        "vary": "Origin",
+        "ratelimit-policy": "100;w=60",
+        "ratelimit-limit": "100",
+        "ratelimit-remaining": "99",
+        "ratelimit-reset": "60",
+        "etag": "W/\"1831-fm2Y3uES86PZYELIcWTciZb/vqI\""
+      }
+    }
+    [35mresponseTime[39m: 2
+[2026-05-04 20:30:00.008 +0530] [32mINFO[39m (32107): [36mRunning weather aggregation cron...[39m
+[2026-05-04 20:30:04.647 +0530] [33mWARN[39m (32107): [36mOpenMeteo fetch failed[39m
