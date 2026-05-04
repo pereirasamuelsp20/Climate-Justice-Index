@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, useMap, ZoomControl, GeoJSON } from 'react-lea
 import 'leaflet/dist/leaflet.css';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAqiData, fetchClimateData, fetchCountryRegions } from '../../api';
-// No longer using turf for voronoi as we use actual administrative regions
+import * as topojson from 'topojson-client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Loader2, Info, ArrowLeft } from 'lucide-react';
 import { Card } from '../ui/card';
@@ -69,6 +69,7 @@ function RegionMapUpdater({ regionsGeoJson }: { regionsGeoJson: any }) {
 export default function HotspotMapScreen() {
   const [showLegend, setShowLegend] = useState(false);
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
+  const [globalTopoJsonData, setGlobalTopoJsonData] = useState<any>(null);
   const [selectedCountry, setSelectedCountry] = useState<{iso2: string, name: string} | null>(null);
 
   useEffect(() => {
@@ -76,6 +77,11 @@ export default function HotspotMapScreen() {
       .then(res => res.json())
       .then(data => setGeoJsonData(data))
       .catch(err => console.error('Failed to load GeoJSON:', err));
+
+    fetch('/admin1.topojson')
+      .then(res => res.json())
+      .then(data => setGlobalTopoJsonData(data))
+      .catch(err => console.error('Failed to load TopoJSON:', err));
   }, []);
 
   const { data: aqiData = [], isLoading: isLoadingAqi } = useQuery({
@@ -228,6 +234,40 @@ export default function HotspotMapScreen() {
     staleTime: 10_000,
     refetchInterval: 2 * 60_000,
   });
+
+  const mergedCountryGeoJson = useMemo(() => {
+    if (!selectedCountry || !globalTopoJsonData || !countryRegionsData) return null;
+
+    try {
+      // Decode TopoJSON into GeoJSON on-the-fly. This prevents massive memory bloat.
+      const geoJson: any = topojson.feature(globalTopoJsonData, globalTopoJsonData.objects.admin1);
+      
+      // Filter features for this country
+      const countryFeatures = geoJson.features.filter((f: any) => 
+        f.properties.iso_a2?.toUpperCase() === selectedCountry.iso2.toUpperCase()
+      );
+
+      // Merge properties with backend API data
+      const mergedFeatures = countryFeatures.map((f: any) => {
+         const apiData = countryRegionsData.find((d: any) => d.name === f.properties.name || d.city === f.properties.name);
+         return {
+           ...f,
+           properties: {
+             ...f.properties,
+             ...apiData
+           }
+         };
+      });
+
+      return {
+        type: 'FeatureCollection',
+        features: mergedFeatures
+      };
+    } catch (e) {
+      console.error("Failed to decode TopoJSON", e);
+      return null;
+    }
+  }, [selectedCountry, globalTopoJsonData, countryRegionsData]);
 
 
 
@@ -437,14 +477,29 @@ export default function HotspotMapScreen() {
               exit={{ opacity: 0, scale: 0.98 }}
               className="absolute inset-0 z-0 bg-[#0c0e14]"
             >
-              {isLoadingCountryRegions ? (
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-[#0c0e14] z-10">
-                  <div className="flex flex-col items-center gap-4">
-                    <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-                    <p className="text-sm text-slate-400">Loading comprehensive administrative regions for {selectedCountry.name}...</p>
+              {isLoadingCountryRegions || !globalTopoJsonData ? (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-[#0c0e14]/90 backdrop-blur-md z-10">
+                  <div className="relative flex flex-col items-center">
+                    {/* Pulsing scanning rings */}
+                    <div className="absolute w-32 h-32 border border-blue-500/20 rounded-full animate-ping opacity-20" style={{ animationDuration: '2s' }}></div>
+                    <div className="absolute w-24 h-24 border border-blue-400/40 rounded-full animate-ping opacity-40" style={{ animationDuration: '1.5s', animationDelay: '0.2s' }}></div>
+                    
+                    <div className="w-16 h-16 bg-[#161a25] rounded-full flex items-center justify-center border border-white/10 shadow-[0_0_30px_rgba(59,130,246,0.3)] z-10 mb-6">
+                      <Loader2 className="w-8 h-8 text-blue-400 animate-spin" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-white mb-2 tracking-wide">Synthesizing Regional Data</h3>
+                    <p className="text-sm text-slate-400 max-w-[280px]">
+                      Decoding high-fidelity topology and aligning live sensor telemetry for <span className="text-blue-400 font-semibold">{selectedCountry.name}</span>...
+                    </p>
+                    
+                    {/* Progress bar simulation */}
+                    <div className="w-48 h-1 bg-slate-800 rounded-full mt-6 overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 animate-pulse rounded-full" style={{ width: '60%', transition: 'width 0.5s' }}></div>
+                    </div>
                   </div>
                 </div>
-              ) : countryRegionsData && countryRegionsData.features?.length > 0 ? (
+              ) : mergedCountryGeoJson && mergedCountryGeoJson.features?.length > 0 ? (
                 <MapContainer
                   center={[20, 0]}
                   zoom={4}
@@ -456,12 +511,12 @@ export default function HotspotMapScreen() {
                     .leaflet-container { outline: none !important; background: transparent !important; }
                   `}</style>
                   <ZoomControl position="bottomright" />
-                  <RegionMapUpdater regionsGeoJson={countryRegionsData} />
+                  <RegionMapUpdater regionsGeoJson={mergedCountryGeoJson} />
                   
-                  {countryRegionsData && (
+                  {mergedCountryGeoJson && (
                     <GeoJSON 
-                      key={selectedCountry.iso2 + '_regions'} 
-                      data={countryRegionsData as any} 
+                      key={selectedCountry.iso2 + '_regions_decoded'} 
+                      data={mergedCountryGeoJson as any} 
                       style={countryInfillStyle} 
                       onEachFeature={onEachInfillFeature}
                     />

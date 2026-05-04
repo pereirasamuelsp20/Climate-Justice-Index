@@ -133,10 +133,7 @@ climateRouter.get('/countries/:iso2/regions', async (req: Request, res: Response
       };
     });
 
-    const result = {
-      type: 'FeatureCollection',
-      features: enrichedFeatures
-    };
+    const result = enrichedFeatures.map((f: any) => f.properties);
 
     cache.set(cacheKey, result);
     res.json(result);
