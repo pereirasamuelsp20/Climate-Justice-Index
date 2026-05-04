@@ -54,7 +54,7 @@ climateRouter.get('/countries/:iso2', async (req: Request, res: Response, next: 
       .single();
 
     if (error && error.code === 'PGRST116') {
-       throw { status: 404, code: 'NOT_FOUND', message: 'Country not found' };
+      throw { status: 404, code: 'NOT_FOUND', message: 'Country not found' };
     }
     if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
 
@@ -96,16 +96,16 @@ climateRouter.get('/countries/:iso2/regions', async (req: Request, res: Response
     }
 
     const allData = getAdmin1Data();
-    
+
     // Filter features by country code
     let countryRegions = allData.features.filter((f: any) => f.properties.iso_a2?.toUpperCase() === iso2.toUpperCase());
-    
+
     // Determine base AQI
     const trackedForCountry = TRACKED_CITIES.filter(c => c.iso2.toUpperCase() === iso2.toUpperCase());
     let baseAqi = 2; // Default to Fair
     if (trackedForCountry.length > 0) {
       const charCode = iso2.charCodeAt(0) + iso2.charCodeAt(1);
-      baseAqi = (charCode % 4) + 1; 
+      baseAqi = (charCode % 4) + 1;
     } else {
       const charCode = iso2.charCodeAt(0) + iso2.charCodeAt(1);
       baseAqi = (charCode % 4) + 1;
@@ -157,7 +157,7 @@ climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunc
 
     const { data: countries, error } = await supabase.from('countries').select('*');
     if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
-    
+
     if (!countries.length) {
       res.json({ most_vulnerable: null, highest_emitter: null, global_injustice_score: 0 });
       return;
@@ -165,14 +165,14 @@ climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunc
 
     let mostVulnerable = countries[0];
     let highestEmitter = countries[0];
-    
+
     const totalEmissions = countries.reduce((acc, c) => acc + (c.emissions_per_capita * c.population), 0);
     let totalInjustice = 0;
 
     countries.forEach(c => {
       if (c.vulnerability_score > mostVulnerable.vulnerability_score) mostVulnerable = c;
       if (c.emissions_per_capita > highestEmitter.emissions_per_capita) highestEmitter = c;
-      
+
       const share = ((c.emissions_per_capita * c.population) / totalEmissions) * 100;
       if (share > 0) {
         totalInjustice += (c.vulnerability_score / share);
@@ -197,10 +197,10 @@ climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunc
 // GET /climate/regions
 climateRouter.get('/regions', async (req: Request, res: Response, next: NextFunction) => {
   try {
-     const { data, error } = await supabase.from('countries').select('region');
-     if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
-     const regions = Array.from(new Set(data.map(d => d.region))).sort();
-     res.json(regions);
+    const { data, error } = await supabase.from('countries').select('region');
+    if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
+    const regions = Array.from(new Set(data.map(d => d.region))).sort();
+    res.json(regions);
   } catch (error) {
     next(error);
   }
@@ -492,7 +492,7 @@ climateRouter.get('/aqi', async (req: Request, res: Response, next: NextFunction
           if (!existingIso2s.has(iso2)) {
             const charCode = iso2.charCodeAt(0) + (iso2.charCodeAt(1) || 0);
             const baseAqi = (charCode % 4) + 1;
-            
+
             aqiData.push({
               country: iso2, // dummy name
               iso2,
@@ -536,7 +536,7 @@ climateRouter.get('/weather', async (req: Request, res: Response, next: NextFunc
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location as string)}&appid=${apiKey}&units=metric`;
     const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
-    
+
     if (!resp.ok) {
       res.status(resp.status).json({ error: 'Failed to fetch weather' });
       return;
@@ -569,14 +569,14 @@ const INITIATIVES_DATA = [
   { id: '10', country: 'France', iso2: 'FR', title: 'Nuclear Fleet Renewal Plan', description: 'Building 6 new EPR2 reactors to maintain carbon-free baseload electricity and reduce gas dependence.', category: 'Nuclear Energy', estimated_completion: '2035-12', status: 'planned' },
   { id: '11', country: 'Japan', iso2: 'JP', title: 'Green Transformation (GX) Bonds', description: 'Issuing ¥20 trillion in transition bonds to fund decarbonization of industry, transport, and buildings.', category: 'Green Finance', estimated_completion: '2033-12', status: 'in-progress' },
   { id: '12', country: 'South Africa', iso2: 'ZA', title: 'Just Energy Transition Partnership', description: '$8.5B international package to retire coal plants and deploy renewables while protecting workers.', category: 'Energy Transition', estimated_completion: '2028-12', status: 'in-progress' },
-  { 
-    id: '13', 
-    country: 'Costa Rica', 
-    iso2: 'CR', 
-    title: 'National PES Forest Recovery', 
-    description: 'Pioneering Payment for Environmental Services (PES) program that successfully reversed decades of deforestation.', 
-    category: 'Reforestation', 
-    estimated_completion: '2015-12', 
+  {
+    id: '13',
+    country: 'Costa Rica',
+    iso2: 'CR',
+    title: 'National PES Forest Recovery',
+    description: 'Pioneering Payment for Environmental Services (PES) program that successfully reversed decades of deforestation.',
+    category: 'Reforestation',
+    estimated_completion: '2015-12',
     status: 'completed',
     timeline: [
       { date: '1996-01', event: 'Program Launch', impact: 21 },
@@ -600,14 +600,14 @@ const INITIATIVES_DATA = [
       justiceServed: true
     }
   },
-  { 
-    id: '14', 
-    country: 'United Kingdom', 
-    iso2: 'GB', 
-    title: 'Coal Power Phase-Out', 
-    description: 'National strategy to completely phase out coal-fired power generation, concluding with the closure of Ratcliffe-on-Soar.', 
-    category: 'Energy Transition', 
-    estimated_completion: '2024-09', 
+  {
+    id: '14',
+    country: 'United Kingdom',
+    iso2: 'GB',
+    title: 'Coal Power Phase-Out',
+    description: 'National strategy to completely phase out coal-fired power generation, concluding with the closure of Ratcliffe-on-Soar.',
+    category: 'Energy Transition',
+    estimated_completion: '2024-09',
     status: 'completed',
     timeline: [
       { date: '2012-01', event: 'Coal at 40% of grid mix', impact: 40, isNegative: true },
@@ -631,14 +631,14 @@ const INITIATIVES_DATA = [
       justiceServed: true
     }
   },
-  { 
-    id: '15', 
-    country: 'Indonesia', 
-    iso2: 'ID', 
-    title: 'Early Peatland Restoration Attempt', 
-    description: 'Initial attempt to block drainage canals and restore 2 million hectares of degraded peatlands to prevent mega-fires.', 
-    category: 'Forest Conservation', 
-    estimated_completion: '2020-12', 
+  {
+    id: '15',
+    country: 'Indonesia',
+    iso2: 'ID',
+    title: 'Early Peatland Restoration Attempt',
+    description: 'Initial attempt to block drainage canals and restore 2 million hectares of degraded peatlands to prevent mega-fires.',
+    category: 'Forest Conservation',
+    estimated_completion: '2020-12',
     status: 'completed',
     timeline: [
       { date: '2015-10', event: 'Mega-fires prompt action', impact: 0 },
@@ -662,14 +662,14 @@ const INITIATIVES_DATA = [
       justiceServed: false
     }
   },
-  { 
-    id: '16', 
-    country: 'Germany', 
-    iso2: 'DE', 
-    title: 'Energiewende Phase 1', 
-    description: 'Initial phase of the national transition to renewable energy, heavily subsidizing solar and wind adoption.', 
-    category: 'Energy Transition', 
-    estimated_completion: '2020-12', 
+  {
+    id: '16',
+    country: 'Germany',
+    iso2: 'DE',
+    title: 'Energiewende Phase 1',
+    description: 'Initial phase of the national transition to renewable energy, heavily subsidizing solar and wind adoption.',
+    category: 'Energy Transition',
+    estimated_completion: '2020-12',
     status: 'completed',
     timeline: [
       { date: '2000-04', event: 'Renewable Energy Sources Act', impact: 5 },
@@ -693,14 +693,14 @@ const INITIATIVES_DATA = [
       justiceServed: false
     }
   },
-  { 
-    id: '17', 
-    country: 'Brazil', 
-    iso2: 'BR', 
-    title: 'Amazon Fund (Phase 1)', 
-    description: 'Performance-based payment mechanism for reducing emissions from deforestation in the Amazon basin.', 
-    category: 'Forest Conservation', 
-    estimated_completion: '2018-12', 
+  {
+    id: '17',
+    country: 'Brazil',
+    iso2: 'BR',
+    title: 'Amazon Fund (Phase 1)',
+    description: 'Performance-based payment mechanism for reducing emissions from deforestation in the Amazon basin.',
+    category: 'Forest Conservation',
+    estimated_completion: '2018-12',
     status: 'completed',
     timeline: [
       { date: '2008-08', event: 'Fund established with Norway', impact: 0 },
@@ -745,6 +745,9 @@ climateRouter.get('/initiatives', async (req: Request, res: Response, next: Next
     res.json(initiatives);
   } catch (error) {
     next(error);
+  }
+});
+
   }
 });
 
