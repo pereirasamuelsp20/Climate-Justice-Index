@@ -66,17 +66,34 @@ export function Layout({ children }: LayoutProps) {
   }, [searchLocation, displayLocation, localAlerts, addLocalAlert]);
 
   return (
-    <div className="min-h-screen bg-[#0f1117] text-slate-100 flex flex-col font-sans overflow-hidden">
-      <Header />
-      
-      <main className="flex-1 overflow-y-auto w-full relative">
-        <div className="mx-auto max-w-7xl p-4 md:p-8">
-          {children}
-        </div>
-      </main>
+    <div className="min-h-screen bg-[#0f1117] text-slate-100 flex flex-col font-sans overflow-hidden relative">
+      {/* Atmospheric Video Background */}
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        className="fixed inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen pointer-events-none"
+      >
+        <source src="/bg_video.mp4" type="video/mp4" />
+      </video>
 
-      <Sidebar />
-      <AlertsDrawer />
+      {/* Global gradient overlay for readability */}
+      <div className="fixed inset-0 bg-linear-to-b from-[#0c0e14]/60 via-[#0c0e14]/40 to-[#0c0e14]/80 z-0 pointer-events-none" />
+
+      {/* Foreground Content */}
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
+        <Header />
+        
+        <main className="flex-1 overflow-y-auto w-full relative">
+          <div className="mx-auto max-w-7xl p-4 md:p-8">
+            {children}
+          </div>
+        </main>
+
+        <Sidebar />
+        <AlertsDrawer />
+      </div>
     </div>
   );
 }

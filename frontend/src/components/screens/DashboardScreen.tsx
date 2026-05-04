@@ -98,7 +98,7 @@ export default function DashboardScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-[#161923] via-[#1a1d2e] to-[#161923] border border-white/6 p-8 md:p-10">
+        <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl p-8 md:p-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
           <div className="relative z-10">
@@ -138,7 +138,7 @@ export default function DashboardScreen() {
               transition={{ delay: i * 0.08, duration: 0.4 }}
             >
               <Card
-                className={`h-full bg-linear-to-br from-[#161923] to-[#1a1d2e] border-white/6 cursor-pointer group transition-all duration-300 overflow-hidden hover:-translate-y-1.5 ${action.hoverClass}`}
+                className={`h-full bg-white/5 backdrop-blur-md border border-white/10 shadow-lg cursor-pointer group transition-all duration-300 overflow-hidden hover:-translate-y-1.5 ${action.hoverClass}`}
                 onClick={() => setCurrentScreen(action.screen)}
               >
                 <CardContent className="p-5 relative">
@@ -167,7 +167,7 @@ export default function DashboardScreen() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Lowest Emitters */}
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-            <Card className="bg-[#161923] border-white/6">
+            <Card className="bg-white/5 backdrop-blur-md border border-white/10 shadow-lg">
               <CardContent className="p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center">
@@ -201,7 +201,7 @@ export default function DashboardScreen() {
 
           {/* Least Vulnerable */}
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-            <Card className="bg-[#161923] border-white/6">
+            <Card className="bg-white/5 backdrop-blur-md border border-white/10 shadow-lg">
               <CardContent className="p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 rounded-lg bg-blue-500/15 flex items-center justify-center">
@@ -235,7 +235,7 @@ export default function DashboardScreen() {
 
           {/* Highest GDP */}
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-            <Card className="bg-[#161923] border-white/6">
+            <Card className="bg-white/5 backdrop-blur-md border border-white/10 shadow-lg">
               <CardContent className="p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center">

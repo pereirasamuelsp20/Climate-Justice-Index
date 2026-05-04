@@ -92,7 +92,7 @@ export default function CompletedInitiativesScreen() {
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-[#161923] rounded-2xl border border-white/6 p-6 animate-pulse">
+            <div key={i} className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg p-6 animate-pulse">
               <div className="h-4 bg-white/6 rounded w-3/4 mb-3" />
               <div className="h-3 bg-white/6 rounded w-1/2 mb-6" />
               <div className="h-20 bg-white/4 rounded" />
@@ -114,7 +114,7 @@ export default function CompletedInitiativesScreen() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.3 }}
               >
-                <Card className="bg-[#161923] border-emerald-500/20 overflow-hidden group hover:border-emerald-500/40 transition-all duration-300 h-full cursor-pointer"
+                <Card className="bg-white/5 backdrop-blur-md shadow-lg border-emerald-500/20 overflow-hidden group hover:border-emerald-500/40 transition-all duration-300 h-full cursor-pointer"
                   onClick={() => setSelectedInit(init)}
                 >
                   <CardContent className="p-0 h-full flex flex-col">
@@ -188,7 +188,7 @@ export default function CompletedInitiativesScreen() {
 
       {/* ── Detail Dialog ── */}
       <Dialog open={!!selectedInit} onOpenChange={(open) => !open && setSelectedInit(null)}>
-        <DialogContent className="sm:max-w-4xl max-w-[95vw] bg-[#161923] border border-white/10 text-white p-0 overflow-hidden max-h-[90vh] flex flex-col">
+        <DialogContent className="sm:max-w-4xl max-w-[95vw] bg-[#0c0e14]/80 backdrop-blur-2xl shadow-2xl border border-white/10 text-white p-0 overflow-hidden max-h-[90vh] flex flex-col">
           <div className="p-6 sm:p-8 overflow-y-auto">
             <DialogHeader className="mb-6">
               <DialogTitle className="flex flex-col sm:flex-row sm:items-start gap-4 text-2xl font-bold">
@@ -246,7 +246,7 @@ export default function CompletedInitiativesScreen() {
                 {/* 2. Before / After Metrics */}
                 {selectedInit.metrics && (
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-[#12141c] p-5 rounded-2xl border border-white/5">
+                    <div className="bg-white/5 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-inner">
                       <h5 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-4 flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-slate-500" />
                         Before Initiative
@@ -260,7 +260,7 @@ export default function CompletedInitiativesScreen() {
                         ))}
                       </div>
                     </div>
-                    <div className="bg-[#12141c] p-5 rounded-2xl border border-emerald-500/20 relative overflow-hidden">
+                    <div className="bg-emerald-500/5 backdrop-blur-md p-5 rounded-2xl border border-emerald-500/20 relative overflow-hidden shadow-inner">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl" />
                       <h5 className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-4 flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />

@@ -81,7 +81,7 @@ export default function InitiativesScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: i * 0.05, duration: 0.3 }}
       >
-        <Card className={`bg-[#161923] border-white/6 overflow-hidden group hover:border-white/12 transition-all duration-300 h-full ${isCompleted ? 'border-emerald-500/20 hover:border-emerald-500/40' : ''}`}>
+        <Card className={`bg-white/5 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden group hover:border-white/20 transition-all duration-300 h-full ${isCompleted ? 'border-emerald-500/20 hover:border-emerald-500/40' : ''}`}>
           <CardContent className="p-0 h-full flex flex-col">
             {/* Category gradient header */}
             <div className={`bg-linear-to-r ${isCompleted ? 'from-emerald-500/10 to-emerald-600/5' : categoryGradient} px-5 py-3 border-b border-white/4`}>
@@ -157,7 +157,7 @@ export default function InitiativesScreen() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-[#161923] rounded-2xl border border-white/6 p-6 animate-pulse">
+              <div key={i} className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg p-6 animate-pulse">
                 <div className="h-4 bg-white/6 rounded w-3/4 mb-3" />
                 <div className="h-3 bg-white/6 rounded w-1/2 mb-6" />
                 <div className="h-20 bg-white/4 rounded" />
@@ -173,7 +173,7 @@ export default function InitiativesScreen() {
 
       {/* Detail Dialog */}
       <Dialog open={!!selectedInit} onOpenChange={(open) => !open && setSelectedInit(null)}>
-        <DialogContent className="sm:max-w-4xl max-w-[95vw] bg-[#161923] border border-white/10 text-white p-0 overflow-hidden max-h-[90vh] flex flex-col">
+        <DialogContent className="sm:max-w-4xl max-w-[95vw] bg-[#0c0e14]/80 backdrop-blur-2xl border border-white/10 text-white p-0 overflow-hidden max-h-[90vh] flex flex-col shadow-2xl">
           <div className="p-6 sm:p-8 overflow-y-auto">
             <DialogHeader className="mb-6">
               <DialogTitle className="flex flex-col sm:flex-row sm:items-start gap-4 text-2xl font-bold">

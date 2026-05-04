@@ -33,14 +33,8 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: 'Graphical Views',
+    screen: 'ranking-graphical',
     icon: <BarChart3 className="h-4 w-4" />,
-    children: [
-      {
-        label: 'Bar Graph',
-        screen: 'ranking-graphical',
-        icon: <BarChart3 className="h-4 w-4" />,
-      },
-    ],
   },
   {
     label: 'Initiatives',
@@ -176,9 +170,9 @@ export function Sidebar() {
     <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
       <SheetContent
         side="left"
-        className="w-72 bg-[#0c0e14] border-r border-white/6 p-0"
+        className="w-72 bg-[#0c0e14]/70 backdrop-blur-2xl border-r border-white/10 p-0"
       >
-        <div className="flex items-center justify-between p-4 border-b border-white/6 h-14">
+        <div className="flex items-center justify-between p-4 border-b border-white/10 h-14">
           <div className="flex items-center gap-2.5">
             <img src="/animated_logo.svg" alt="Logo" className="h-8 w-8 object-contain" />
             <span className="text-sm font-semibold text-white">Navigation</span>

@@ -108,7 +108,7 @@ export default function RankingStatisticalScreen() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-[#161923] rounded-2xl border border-white/6 overflow-hidden"
+        className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
       >
         {isLoading ? (
           <div className="p-8 flex items-center justify-center">

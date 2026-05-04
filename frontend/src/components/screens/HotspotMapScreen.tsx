@@ -332,7 +332,7 @@ export default function HotspotMapScreen() {
         <div className="absolute top-4 right-4 z-30 flex flex-col items-end">
           <button
             onClick={() => setShowLegend(!showLegend)}
-            className="w-10 h-10 rounded-full bg-[#161923]/90 backdrop-blur-md shadow-2xl border border-white/10 flex items-center justify-center hover:bg-[#1f2333] transition-colors cursor-pointer mb-2"
+            className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-md shadow-2xl border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer mb-2"
           >
             <Info className="w-5 h-5 text-slate-300" />
           </button>
@@ -345,7 +345,7 @@ export default function HotspotMapScreen() {
                 exit={{ opacity: 0, scale: 0.95, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card className="bg-[#161923]/90 backdrop-blur-md border-white/10 shadow-2xl p-4 w-56">
+                <Card className="bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl p-4 w-56">
                   <h3 className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">AQI Legend</h3>
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-emerald-500" /> <span className="text-slate-300">Good (1)</span></div>

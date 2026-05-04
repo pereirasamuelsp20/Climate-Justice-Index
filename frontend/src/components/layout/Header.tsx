@@ -24,7 +24,7 @@ export function Header() {
   const unreadAlerts = allAlerts.filter(a => a.severity === 'High' || a.severity === 'Critical').length;
 
   return (
-    <header className="sticky top-0 z-30 flex h-20 w-full items-center justify-between border-b border-white/6 bg-[#0f1117]/80 px-4 md:px-6 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 flex h-20 w-full items-center justify-between border-b border-white/10 bg-white/5 px-4 md:px-6 backdrop-blur-xl shadow-sm">
       <div className="flex items-center gap-4">
         {/* Hamburger menu for all sizes */}
         <Button

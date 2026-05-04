@@ -17,7 +17,7 @@ export default function RankingGraphicalScreen() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-[#161923] rounded-2xl p-6 border border-white/6 relative flex-1 min-h-[400px]"
+        className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-2xl relative flex-1 min-h-[400px]"
       >
         <Suspense
           fallback={
