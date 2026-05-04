@@ -1,0 +1,128 @@
+import axios from 'axios';
+import { supabase } from '../lib/supabase';
+
+const api = axios.create({
+  baseURL: '/api/v1',
+});
+
+// Dynamically fetch the current Supabase session token for every request
+// This ensures we always use the latest (auto-refreshed) token instead of a
+// stale localStorage copy.
+api.interceptors.request.use(async (config) => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session?.access_token) {
+    config.headers.Authorization = `Bearer ${session.access_token}`;
+  }
+  return config;
+});
+
+export interface ClimateData {
+  id: string;
+  name: string;
+  iso2: string;
+  region: string;
+  emissions_per_capita: number;     // X-axis
+  vulnerability_score: number;      // Y-axis (0-1)
+  population: number;               // Radius
+  gdp_per_capita: number;           // Raw value
+  gdp_quartile: 1 | 2 | 3 | 4;      // Color mapping
+  emissions_share_pct: number;      // for Bar chart
+  injustice_score: number;          // for Bar chart
+}
+
+export interface WeatherAlert {
+  id: string;
+  alert_type: string;
+  severity: 'Low' | 'Medium' | 'High' | 'Critical';
+  region: string;
+  source_data: any;
+  confidence_score: number;
+  created_at: string;
+}
+
+export interface Initiative {
+  id: string;
+  country: string;
+  iso2: string;
+  title: string;
+  description: string;
+  category: string;
+  estimated_completion: string;
+  status: 'planned' | 'in-progress' | 'completed';
+  source_url?: string;
+  
+  // Historical data for completed initiatives
+  timeline?: { date: string; event: string; impact: number; isNegative?: boolean }[];
+  metrics?: {
+    before: { label: string; value: string }[];
+    after: { label: string; value: string }[];
+  };
+  evaluation?: {
+    summary: string;
+    wasHelpful: boolean;
+    justiceServed: boolean;
+  };
+}
+
+export interface AqiData {
+  country: string;
+  iso2: string;
+  city: string;
+  aqi: number;
+  dominant_pollutant: string;
+  lat: number;
+  lon: number;
+  updated_at: string;
+}
+
+export const fetchClimateData = async (): Promise<ClimateData[]> => {
+  const { data } = await api.get('/climate/countries');
+  return data;
+};
+
+export const fetchWeatherAlerts = async (region?: string | null): Promise<WeatherAlert[]> => {
+  try {
+    const params = region ? { region } : {};
+    const { data } = await api.get('/alerts', { params });
+    return data;
+  } catch (error) {
+    // If user is unauthenticated or endpoint not fully configured, return safe empty
+    return [];
+  }
+};
+
+export const fetchInitiatives = async (): Promise<Initiative[]> => {
+  try {
+    const { data } = await api.get('/climate/initiatives');
+    return data;
+  } catch {
+    return [];
+  }
+};
+
+export const fetchAqiData = async (): Promise<AqiData[]> => {
+  try {
+    const { data } = await api.get('/climate/aqi');
+    return data;
+  } catch {
+    return [];
+  }
+};
+
+export const fetchCountryRegions = async (iso2: string): Promise<any> => {
+  try {
+    const { data } = await api.get(`/climate/countries/${iso2}/regions`);
+    return data;
+  } catch {
+    return null;
+  }
+};
+
+export const fetchWeather = async (location: string): Promise<any> => {
+  try {
+    const { data } = await api.get(`/climate/weather?location=${encodeURIComponent(location)}`);
+    return data;
+  } catch {
+    return null;
+  }
+};
