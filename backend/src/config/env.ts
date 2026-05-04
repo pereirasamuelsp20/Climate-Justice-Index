@@ -6,7 +6,7 @@ dotenv.config();
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().default('3000'),
-  FRONTEND_URL: z.string().url(),
+  FRONTEND_URL: z.string(), // Comma-separated origins allowed (e.g. http://localhost:5173,https://yourapp.vercel.app)
   SUPABASE_URL: z.string().url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string(),
   OPENWEATHER_KEY: z.string(),

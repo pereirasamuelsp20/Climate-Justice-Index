@@ -61,11 +61,14 @@ function App() {
   // Detect fresh login (session transitions from null → valid)
   useEffect(() => {
     if (!prevSession && session) {
-      // Fresh login → show storm transition
+      // Fresh login → show storm transition and reset to dashboard
       setPhase('transition');
       useUserStore.getState().setHasSeenOnboarding(false);
+      useAppStore.getState().setCurrentScreen('dashboard');
     } else if (!session) {
       setPhase('auth');
+      // Reset to dashboard so next login starts fresh
+      useAppStore.getState().setCurrentScreen('dashboard');
     }
     setPrevSession(session);
   }, [session, prevSession]);

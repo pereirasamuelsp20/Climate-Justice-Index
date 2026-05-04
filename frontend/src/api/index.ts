@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { supabase } from '../lib/supabase';
 
+// In development, Vite proxies /api → localhost:5001
+// In production (Vercel), VITE_BACKEND_URL points to the Render backend
+const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+
 const api = axios.create({
-  baseURL: '/api/v1',
+  baseURL: `${backendUrl}/api/v1`,
 });
 
 // Dynamically fetch the current Supabase session token for every request

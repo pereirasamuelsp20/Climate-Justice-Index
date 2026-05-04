@@ -20,12 +20,12 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
     if (!video) return;
 
     // Start video
-    video.play().catch(() => {});
+    video.play().catch(() => { });
 
     // Start calming ocean audio with smooth fade-in
     if (audio) {
       audio.volume = 0;
-      audio.play().catch(() => {});
+      audio.play().catch(() => { });
       let vol = 0;
       const fadeIn = setInterval(() => {
         vol = Math.min(vol + 0.015, 0.35);

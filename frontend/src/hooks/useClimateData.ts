@@ -19,8 +19,9 @@ export const useClimateData = () => {
   return useQuery<ClimateData[]>({
     queryKey: ['climateData'],
     queryFn: fetchClimateData,
-    staleTime: 5 * 60 * 1000, // 5 minutes stale time as requested
-    retry: 1,
+    staleTime: 10_000,            // 10-second buffer before refetch
+    refetchInterval: 2 * 60_000,  // Auto-poll every 2 minutes for live data
+    retry: 2,
     placeholderData: FALLBACK_DATA, // show fallback while loading / on error
   });
 };

@@ -9,6 +9,7 @@ export const useWeatherAlerts = () => {
   return useQuery<WeatherAlert[]>({
     queryKey: ['weatherAlerts', regionFilter],
     queryFn: () => fetchWeatherAlerts(regionFilter),
-    staleTime: 10 * 60 * 1000, // 10 minutes stale time as requested
+    staleTime: 10_000,            // 10-second buffer before refetch
+    refetchInterval: 2 * 60_000,  // Auto-poll every 2 minutes for live alerts
   });
 };

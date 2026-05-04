@@ -64,7 +64,8 @@ export default function InitiativesScreen() {
   const { data: initiatives = [], isLoading } = useQuery({
     queryKey: ['initiatives'],
     queryFn: fetchInitiatives,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 10_000,
+    refetchInterval: 2 * 60_000,
   });
 
   const activeInitiatives = initiatives.filter(i => i.status !== 'completed');

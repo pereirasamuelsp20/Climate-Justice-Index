@@ -5,6 +5,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from '../ui/button';
 import { Camera, Loader2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { AutocompleteInput } from '../ui/AutocompleteInput';
+import { Country, State } from 'country-state-city';
+import { useMemo } from 'react';
 
 const compressImage = (file: File): Promise<File> => {
   return new Promise((resolve) => {
@@ -68,6 +71,21 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
   const [country, setCountry] = useState(metadata.country || '');
   const [region, setRegion] = useState(metadata.region || '');
   const [avatarUrl, setAvatarUrl] = useState<string>(metadata.avatar_url || '');
+
+  const countries = useMemo(() => Country.getAllCountries().map(c => c.name).sort(), []);
+  
+  const regions = useMemo(() => {
+    const selectedCountry = Country.getAllCountries().find(c => c.name === country);
+    if (!selectedCountry) return [];
+    return State.getStatesOfCountry(selectedCountry.isoCode).map(s => s.name).sort();
+  }, [country]);
+
+  const handleCountryChange = (val: string) => {
+    setCountry(val);
+    if (val !== country) {
+      setRegion('');
+    }
+  };
   
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -203,26 +221,20 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300">Country</label>
-                <input 
-                  type="text" 
-                  value={country} 
-                  onChange={(e) => setCountry(e.target.value)}
-                  className="w-full bg-[#1a1d2e] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                  placeholder="e.g. Norway"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300">Region</label>
-                <input 
-                  type="text" 
-                  value={region} 
-                  onChange={(e) => setRegion(e.target.value)}
-                  className="w-full bg-[#1a1d2e] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                  placeholder="e.g. Europe"
-                />
-              </div>
+              <AutocompleteInput
+                label="Country"
+                value={country}
+                onChange={handleCountryChange}
+                suggestions={countries}
+                placeholder="e.g. India"
+              />
+              <AutocompleteInput
+                label="Region / State"
+                value={region}
+                onChange={setRegion}
+                suggestions={regions}
+                placeholder="e.g. Maharashtra"
+              />
             </div>
           </div>
         </div>

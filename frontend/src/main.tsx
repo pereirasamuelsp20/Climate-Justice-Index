@@ -5,7 +5,16 @@ import { Toaster } from 'sonner'
 import './index.css'
 import App from './App.tsx'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10_000,           // 10-second buffer before data is considered stale
+      refetchOnWindowFocus: true,   // Re-fetch when user tabs back
+      refetchOnReconnect: true,     // Re-fetch after network recovery
+      retry: 2,                     // Retry failed requests twice
+    },
+  },
+})
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

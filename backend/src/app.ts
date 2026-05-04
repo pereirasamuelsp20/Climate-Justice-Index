@@ -16,7 +16,19 @@ export const app = express();
 
 // Security and utility middlewares
 app.use(helmet());
-app.use(cors({ origin: env.FRONTEND_URL }));
+// Support multiple origins: comma-separated FRONTEND_URL for both local dev and production
+const allowedOrigins = env.FRONTEND_URL.split(',').map(s => s.trim());
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, server-to-server)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 // 100 req/min per IP limit

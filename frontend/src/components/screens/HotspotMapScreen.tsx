@@ -81,22 +81,44 @@ export default function HotspotMapScreen() {
   const { data: aqiData = [], isLoading: isLoadingAqi } = useQuery({
     queryKey: ['aqiData'],
     queryFn: fetchAqiData,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 10_000,
+    refetchInterval: 2 * 60_000,
   });
 
   const { data: climateData = [], isLoading: isLoadingClimate } = useQuery({
     queryKey: ['climateData'],
     queryFn: fetchClimateData,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 10_000,
+    refetchInterval: 2 * 60_000,
   });
 
   const isLoading = isLoadingAqi || isLoadingClimate || !geoJsonData;
 
   // Merge AQI data with climate data (vulnerability)
-  const mapMarkers = aqiData.map(aqi => {
-    const countryData = climateData.find(c => c.iso2 === aqi.iso2);
+  // Compute per-country average AQI from all tracked cities
+  const countryAqiMap = new Map<string, { totalAqi: number; count: number; worstPollutant: string; worstAqi: number }>();
+  aqiData.forEach(aqi => {
+    const key = aqi.iso2;
+    const existing = countryAqiMap.get(key);
+    if (existing) {
+      existing.totalAqi += aqi.aqi;
+      existing.count += 1;
+      if (aqi.aqi > existing.worstAqi) {
+        existing.worstAqi = aqi.aqi;
+        existing.worstPollutant = aqi.dominant_pollutant;
+      }
+    } else {
+      countryAqiMap.set(key, { totalAqi: aqi.aqi, count: 1, worstPollutant: aqi.dominant_pollutant, worstAqi: aqi.aqi });
+    }
+  });
+
+  const mapMarkers = Array.from(countryAqiMap.entries()).map(([iso2, stats]) => {
+    const countryData = climateData.find(c => c.iso2 === iso2);
+    const firstCity = aqiData.find(a => a.iso2 === iso2)!;
     return {
-      ...aqi,
+      ...firstCity,
+      aqi: Math.round(stats.totalAqi / stats.count), // Average AQI across all cities
+      dominant_pollutant: stats.worstPollutant,
       vulnerability: countryData?.vulnerability_score || 0,
       emissions: countryData?.emissions_per_capita || 0,
     };
@@ -203,7 +225,8 @@ export default function HotspotMapScreen() {
     queryKey: ['countryRegions', selectedCountry?.iso2],
     queryFn: () => fetchCountryRegions(selectedCountry?.iso2 as string),
     enabled: !!selectedCountry,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 10_000,
+    refetchInterval: 2 * 60_000,
   });
 
 
