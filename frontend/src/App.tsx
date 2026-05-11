@@ -108,8 +108,10 @@ function App() {
     return (
       <>
         <StormTransition onComplete={handleTransitionComplete} />
-        {/* Pre-render dashboard behind the overlay for instant reveal */}
-        <div className="opacity-0 pointer-events-none">
+        {/* Pre-render dashboard behind the overlay for instant reveal.
+            Use visibility:hidden + fixed positioning (not opacity-0) to preserve
+            real layout dimensions — prevents Recharts -1 width/height warnings. */}
+        <div style={{ visibility: 'hidden', position: 'fixed', inset: 0, pointerEvents: 'none' }}>
           <Layout>
             <DashboardScreen />
           </Layout>

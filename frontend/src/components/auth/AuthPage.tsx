@@ -252,9 +252,6 @@ export default function AuthPage() {
   const setSession = useUserStore((state) => state.setSession);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Construct backend API base URL (same logic as api/index.ts)
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
-
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -262,28 +259,26 @@ export default function AuthPage() {
 
     try {
       if (isSignUp) {
-        // Call our backend signup endpoint — this creates the user via Admin API
-        // (no ugly Supabase default email) and sends only our beautiful branded Resend email
-        const res = await fetch(`${backendUrl}/api/v1/auth/signup`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, name }),
+        // Use Supabase's built-in signup — it reliably delivers verification emails.
+        // Customize the email template in Supabase Dashboard → Auth → Email Templates.
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { name },
+            emailRedirectTo: `${window.location.origin}`,
+          },
         });
+        if (error) throw error;
 
-        const body = await res.json();
-
-        if (!res.ok) {
-          // Map backend error codes to user-friendly messages
-          const errMsg = body?.error?.message || 'Signup failed. Please try again.';
-          const errCode = body?.error?.code || '';
-          if (errCode === 'USER_EXISTS') {
-            throw { message: 'This email is already registered. Try logging in instead.', code: 'user_already_exists' };
-          }
-          throw { message: errMsg };
+        if (data.session) {
+          // Auto-confirmed — proceed immediately
+          localStorage.setItem('supabase-auth-token', data.session.access_token);
+          setSession(data.session);
+        } else if (data.user && !data.session) {
+          // Email confirmation required — show check-email screen
+          setEmailSent(true);
         }
-
-        // Account created — show the "check your email" screen
-        setEmailSent(true);
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
