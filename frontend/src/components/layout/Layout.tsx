@@ -122,10 +122,10 @@ export function Layout({ children }: LayoutProps) {
       <div className="fixed inset-0 bg-linear-to-b from-[#0c0e14]/60 via-[#0c0e14]/40 to-[#0c0e14]/80 z-0 pointer-events-none" />
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col min-h-screen w-full">
+      <div className="relative z-10 flex flex-col min-h-screen w-full" style={{ WebkitOverflowScrolling: 'touch' as any, touchAction: 'manipulation' }}>
         <Header />
         
-        <main className="flex-1 w-full relative">
+        <main className="flex-1 w-full relative overflow-y-auto">
           <div className="mx-auto max-w-7xl p-4 md:p-8">
             {children}
           </div>

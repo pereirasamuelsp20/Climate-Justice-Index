@@ -22,17 +22,42 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
     if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
 
     // Compute injustice_score = vulnerability_score / emissions_share_pct
-    // First figure out total global emissions using the dataset
-    const totalEmissions = countries.reduce((acc, c) => acc + (c.emissions_per_capita * c.population), 0);
+    // Then compute composite_score using all 5 factors (emissions, vulnerability, GDP, injustice, emissions_share)
+    const totalEmissions = countries.reduce((acc: number, c: any) => acc + (c.emissions_per_capita * c.population), 0);
+    const maxEmissions = Math.max(...countries.map((c: any) => c.emissions_per_capita));
+    const maxGdp = Math.max(...countries.map((c: any) => c.gdp_per_capita));
 
-    const enrichCountries = countries.map(c => {
+    // First pass: compute injustice scores for all countries
+    const withInjustice = countries.map((c: any) => {
       const countryEmissions = c.emissions_per_capita * c.population;
       const emissionsSharePct = (countryEmissions / totalEmissions) * 100;
       const injusticeScore = emissionsSharePct > 0 ? (c.vulnerability_score / emissionsSharePct) : 0;
+      return { ...c, emissions_share_pct: emissionsSharePct, injustice_score: injusticeScore };
+    });
+
+    const maxInjustice = Math.max(...withInjustice.map((c: any) => c.injustice_score));
+
+    // Second pass: compute composite using all normalized factors
+    const enrichCountries = withInjustice.map((c: any) => {
+      // Normalize all factors to 0–1 range
+      const normEmissions = c.emissions_per_capita / (maxEmissions || 1);
+      const normVulnerability = c.vulnerability_score; // already 0–1
+      const normGdpInverse = 1 - (c.gdp_per_capita / (maxGdp || 1)); // low GDP → higher score (more vulnerable)
+      const normInjustice = c.injustice_score / (maxInjustice || 1);
+
+      // Weighted composite — lower is better for climate justice position
+      const composite = (
+        normEmissions * 0.25 +
+        normVulnerability * 0.25 +
+        normGdpInverse * 0.20 +
+        normInjustice * 0.30
+      );
+
       return {
         ...c,
-        emissions_share_pct: parseFloat(emissionsSharePct.toFixed(2)),
-        injustice_score: parseFloat(injusticeScore.toFixed(4)),
+        emissions_share_pct: parseFloat(c.emissions_share_pct.toFixed(2)),
+        injustice_score: parseFloat(c.injustice_score.toFixed(4)),
+        composite_score: parseFloat(composite.toFixed(4)),
       };
     });
 

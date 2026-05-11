@@ -8,7 +8,7 @@ const METRICS = [
   { id: 'vulnerability_score', label: 'Vulnerability', color: '#f87171' },
   { id: 'gdp_per_capita', label: 'GDP/Capita', color: '#fbbf24' },
   { id: 'injustice_score', label: 'Injustice Score', color: '#f472b6' },
-  { id: 'composite', label: 'Composite Score', color: '#a78bfa' },
+  { id: 'composite_score', label: 'Composite Score', color: '#a78bfa' },
 ] as const;
 
 type MetricId = typeof METRICS[number]['id'];
@@ -42,20 +42,13 @@ export default function BarChart() {
 
   const selectedMetric = METRICS.find(m => m.id === selectedMetricId) || METRICS[0];
 
+  // composite_score is now computed server-side with all 5 factors
   const chartData = useMemo(() => {
     if (!climateData) return [];
-    
-    // First, enrich with composite score
-    const maxEmissions = Math.max(...climateData.map((d) => d.emissions_per_capita));
-    const enrichedData = climateData.map(c => {
-      const normEmissions = c.emissions_per_capita / (maxEmissions || 1);
-      const composite = (normEmissions + c.vulnerability_score) / 2;
-      return { ...c, composite: parseFloat(composite.toFixed(4)) };
-    });
 
     let filtered = regionFilter 
-      ? enrichedData.filter(d => d.region === regionFilter)
-      : [...enrichedData];
+      ? climateData.filter(d => d.region === regionFilter)
+      : [...climateData];
       
     // Sort by selected metric descending
     filtered.sort((a, b) => {

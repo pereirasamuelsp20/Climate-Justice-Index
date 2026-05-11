@@ -32,6 +32,7 @@ export interface ClimateData {
   gdp_quartile: 1 | 2 | 3 | 4;      // Color mapping
   emissions_share_pct: number;      // for Bar chart
   injustice_score: number;          // for Bar chart
+  composite_score: number;          // weighted composite of all 5 factors (lower = better)
 }
 
 export interface WeatherAlert {

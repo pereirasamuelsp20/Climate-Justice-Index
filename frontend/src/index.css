@@ -102,6 +102,24 @@
   }
 }
 
+/* ─── Mobile scroll & touch fixes ─── */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+  }
+  /* Prevent fixed backgrounds from blocking scroll on iOS */
+  .fixed {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  /* Safe area padding for notched devices */
+  main {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
 /* ─── GPU-accelerated animation helpers ─── */
 .gpu-layer {
   will-change: transform;

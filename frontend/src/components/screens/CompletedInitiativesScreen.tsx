@@ -172,11 +172,11 @@ export default function CompletedInitiativesScreen() {
                           <Calendar className="w-3 h-3" />
                           <span>Completed: {formatDate(init.estimated_completion)}</span>
                         </div>
-                        <span className="flex items-center gap-1 text-[11px] text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="flex items-center gap-1 text-[11px] text-emerald-400 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                           View Timeline
                           <ArrowRight className="w-3.5 h-3.5" />
                         </span>
-                        <ArrowRight className="w-3.5 h-3.5 text-emerald-900 group-hover:hidden transition-colors" />
+                        <ArrowRight className="w-3.5 h-3.5 text-emerald-900 hidden sm:block sm:group-hover:hidden transition-colors" />
                       </div>
                     </div>
                   </CardContent>

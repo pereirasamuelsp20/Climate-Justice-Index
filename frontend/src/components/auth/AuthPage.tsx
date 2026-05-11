@@ -13,7 +13,11 @@ function StormAudio({ videoRef }: { videoRef: any }) {
     const video = videoRef.current;
     if (!audio) return;
 
-    audio.volume = 0.4; // Instant playback, no fade-in delay
+    // Detect mobile — audio-video sync causes crackling on mobile browsers
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // Lower volume on mobile to prevent distortion from small speakers
+    audio.volume = isMobile ? 0.2 : 0.4;
     
     const tryPlay = () => {
       audio.play().catch(() => {});
@@ -22,35 +26,41 @@ function StormAudio({ videoRef }: { videoRef: any }) {
     // Try autoplay immediately
     tryPlay();
     
+    // Mobile browsers require user gesture for audio — listen for touch too
     const handleInteraction = () => {
       tryPlay();
       document.removeEventListener('click', handleInteraction);
       document.removeEventListener('keydown', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
     };
     document.addEventListener('click', handleInteraction);
     document.addEventListener('keydown', handleInteraction);
+    document.addEventListener('touchstart', handleInteraction);
 
-    // Hard-sync audio loop to video loop for perfect wave crashes
-    const syncAudio = () => {
-      if (video && audio && !audio.paused) {
-        if (Math.abs(video.currentTime - audio.currentTime) > 0.15) {
-          audio.currentTime = video.currentTime;
+    // Only sync audio to video on desktop — mobile sync causes crackling/skipping
+    let syncCleanup: (() => void) | null = null;
+    if (!isMobile && video) {
+      const syncAudio = () => {
+        if (audio && !audio.paused && video) {
+          // Use larger threshold to avoid constant micro-seeks
+          if (Math.abs(video.currentTime - audio.currentTime) > 0.5) {
+            audio.currentTime = video.currentTime;
+          }
         }
-      }
-    };
-
-    if (video) {
-      video.addEventListener('timeupdate', syncAudio);
+      };
+      video.addEventListener('seeked', syncAudio);
       video.addEventListener('play', tryPlay);
+      syncCleanup = () => {
+        video.removeEventListener('seeked', syncAudio);
+        video.removeEventListener('play', tryPlay);
+      };
     }
 
     return () => {
       document.removeEventListener('click', handleInteraction);
       document.removeEventListener('keydown', handleInteraction);
-      if (video) {
-        video.removeEventListener('timeupdate', syncAudio);
-        video.removeEventListener('play', tryPlay);
-      }
+      document.removeEventListener('touchstart', handleInteraction);
+      if (syncCleanup) syncCleanup();
       if (audio) { audio.pause(); audio.currentTime = 0; }
     };
   }, [videoRef]);

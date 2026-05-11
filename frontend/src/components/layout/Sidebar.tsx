@@ -41,7 +41,7 @@ const NAV_ITEMS: NavItem[] = [
     icon: <Leaf className="h-4 w-4" />,
     children: [
       {
-        label: 'Active Programs',
+        label: 'Active Initiatives',
         screen: 'initiatives',
         icon: <Leaf className="h-4 w-4" />,
       },

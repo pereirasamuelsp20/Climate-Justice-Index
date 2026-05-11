@@ -119,8 +119,13 @@ export const sendVerificationEmail = async (payload: VerificationEmailPayload): 
           
           <!-- Hero Header -->
           <div style="background: linear-gradient(135deg, #1e3a5f 0%, #0f1117 50%, #1a2332 100%); padding: 48px 40px; text-align: center; position: relative;">
-            <div style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, #3b82f6, #06b6d4); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
-              <span style="color: white; font-weight: bold; font-size: 22px; line-height: 64px;">CJ</span>
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #5DCAA5, #1D9E75, #04342C); margin: 0 auto 20px; border: 3px solid rgba(93, 202, 165, 0.4); box-shadow: 0 0 24px rgba(29, 158, 117, 0.3);">
+              <div style="width: 100%; height: 100%; border-radius: 50%; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(225, 245, 238, 0.15);"></div>
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(225, 245, 238, 0.1);"></div>
+                <div style="position: absolute; top: 25%; left: 30%; width: 12px; height: 8px; background: #04342C; border-radius: 40%; opacity: 0.5;"></div>
+                <div style="position: absolute; top: 45%; left: 42%; width: 10px; height: 14px; background: #04342C; border-radius: 40%; opacity: 0.5;"></div>
+              </div>
             </div>
             <h1 style="color: #ffffff; margin: 0 0 8px 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
               Welcome to Climate Justice

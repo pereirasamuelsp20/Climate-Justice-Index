@@ -11,27 +11,17 @@ const countryFlag = (iso2: string) => {
   return String.fromCodePoint(...codePoints);
 };
 
-type SortKey = 'name' | 'emissions_per_capita' | 'vulnerability_score' | 'gdp_per_capita' | 'injustice_score' | 'composite';
+type SortKey = 'name' | 'emissions_per_capita' | 'vulnerability_score' | 'gdp_per_capita' | 'injustice_score' | 'composite_score';
 type SortDir = 'asc' | 'desc';
 
 export default function RankingStatisticalScreen() {
   const { data: climateData, isLoading } = useClimateData();
-  const [sortKey, setSortKey] = useState<SortKey>('composite');
+  const [sortKey, setSortKey] = useState<SortKey>('composite_score');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const enrichedData = useMemo(() => {
-    if (!climateData) return [];
-    return climateData.map((c) => {
-      // Composite score: lower is better
-      // Normalize emissions (0-1, lower is better), vulnerability (already 0-1, lower is better)
-      const maxEmissions = Math.max(...climateData.map((d) => d.emissions_per_capita));
-      const normEmissions = c.emissions_per_capita / (maxEmissions || 1);
-      // Composite: average of normalized emissions + vulnerability (lower = better for climate)
-      const composite = (normEmissions + c.vulnerability_score) / 2;
-      return { ...c, composite: parseFloat(composite.toFixed(4)) };
-    });
-  }, [climateData]);
+  // composite_score is now computed server-side with all 5 factors
+  const enrichedData = climateData || [];
 
   const sortedData = useMemo(() => {
     let data = [...enrichedData];
@@ -129,7 +119,7 @@ export default function RankingStatisticalScreen() {
                   <SortHeader label="Vulnerability" field="vulnerability_score" />
                   <SortHeader label="GDP/Capita" field="gdp_per_capita" />
                   <SortHeader label="Injustice Score" field="injustice_score" />
-                  <SortHeader label="Composite Score" field="composite" />
+                  <SortHeader label="Composite Score" field="composite_score" />
                 </tr>
               </thead>
               <tbody>
@@ -175,9 +165,9 @@ export default function RankingStatisticalScreen() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <div
-                          className={`w-2.5 h-2.5 rounded-full ${c.composite < 0.2 ? 'bg-emerald-400' : c.composite < 0.5 ? 'bg-amber-400' : 'bg-red-400'}`}
+                          className={`w-2.5 h-2.5 rounded-full ${c.composite_score < 0.3 ? 'bg-emerald-400' : c.composite_score < 0.6 ? 'bg-amber-400' : 'bg-red-400'}`}
                         />
-                        <span className="text-sm font-bold text-white">{c.composite}</span>
+                        <span className="text-sm font-bold text-white">{c.composite_score}</span>
                       </div>
                     </td>
                   </tr>

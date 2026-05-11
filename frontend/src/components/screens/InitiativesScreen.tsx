@@ -127,12 +127,12 @@ export default function InitiativesScreen() {
                     e.stopPropagation();
                     setSelectedInit(init);
                   }}
-                  className={`flex items-center gap-1 text-[11px] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer ${isCompleted ? 'text-emerald-400 hover:text-emerald-300' : 'text-blue-400 hover:text-blue-300'}`}
+                  className={`flex items-center gap-1 text-[11px] sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer ${isCompleted ? 'text-emerald-400 hover:text-emerald-300' : 'text-blue-400 hover:text-blue-300'}`}
                 >
-                  <span>{isCompleted ? 'Historical Data' : 'Essential Data'}</span>
+                  <span>{isCompleted ? 'Historical Data' : 'Learn More'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
-                <ArrowRight className={`w-3.5 h-3.5 group-hover:hidden transition-colors ${isCompleted ? 'text-emerald-900' : 'text-slate-600'}`} />
+                <ArrowRight className={`w-3.5 h-3.5 hidden sm:block sm:group-hover:hidden transition-colors ${isCompleted ? 'text-emerald-900' : 'text-slate-600'}`} />
               </div>
             </div>
           </CardContent>
