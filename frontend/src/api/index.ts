@@ -20,6 +20,20 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
+// Auto-retry on 429 (rate-limited) with exponential backoff
+api.interceptors.response.use(undefined, async (error) => {
+  const config = error.config;
+  if (error.response?.status === 429 && (!config._retryCount || config._retryCount < 3)) {
+    config._retryCount = (config._retryCount || 0) + 1;
+    // Use server's Retry-After header or exponential backoff (1s, 2s, 4s)
+    const retryAfter = error.response.headers['retry-after'];
+    const delay = retryAfter ? Number(retryAfter) * 1000 : 1000 * Math.pow(2, config._retryCount - 1);
+    await new Promise(resolve => setTimeout(resolve, delay));
+    return api(config);
+  }
+  return Promise.reject(error);
+});
+
 export interface ClimateData {
   id: string;
   name: string;

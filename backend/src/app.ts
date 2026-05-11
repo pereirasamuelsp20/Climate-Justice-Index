@@ -29,13 +29,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// 100 req/min per IP limit
+// 300 req/min per IP limit (generous for SPA with parallel data fetches + auth checks)
 const limiter = rateLimit({
   windowMs: 60 * 1000, 
-  max: 100, 
+  max: 300, 
   message: { error: { code: 'RATE_LIMIT', message: 'Too many requests' }, status: 429 },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => req.path === '/health', // Don't count health checks
 });
 app.use(limiter);
 

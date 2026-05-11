@@ -81,15 +81,15 @@ export default function HotspotMapScreen() {
   const { data: aqiData = [], isLoading: isLoadingAqi } = useQuery({
     queryKey: ['aqiData'],
     queryFn: fetchAqiData,
-    staleTime: 10_000,
-    refetchInterval: 2 * 60_000,
+    staleTime: 5 * 60_000,
+    refetchInterval: 5 * 60_000,
   });
 
   const { data: climateData = [], isLoading: isLoadingClimate } = useQuery({
     queryKey: ['climateData'],
     queryFn: fetchClimateData,
-    staleTime: 10_000,
-    refetchInterval: 2 * 60_000,
+    staleTime: 5 * 60_000,
+    refetchInterval: 5 * 60_000,
   });
 
   const isLoading = isLoadingAqi || isLoadingClimate || !geoJsonData;
@@ -225,8 +225,8 @@ export default function HotspotMapScreen() {
     queryKey: ['countryRegions', selectedCountry?.iso2],
     queryFn: () => fetchCountryRegions(selectedCountry?.iso2 as string),
     enabled: !!selectedCountry,
-    staleTime: 10_000,
-    refetchInterval: 2 * 60_000,
+    staleTime: 5 * 60_000,
+    refetchInterval: 5 * 60_000,
   });
 
 
