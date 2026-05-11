@@ -13,7 +13,6 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   const session = useUserStore(state => state.session);
   const addLocalAlert = useAppStore(state => state.addLocalAlert);
-  const localAlerts = useAppStore(state => state.localAlerts);
   const country = session?.user?.user_metadata?.country;
   const region = session?.user?.user_metadata?.region;
 
@@ -56,11 +55,15 @@ export function Layout({ children }: LayoutProps) {
     // Already showed a notification for this location today (IST) — skip
     if (lastShown === today) return;
 
-    // Also skip if there's already an active local alert for this location in state
-    if (localAlerts.some(a => a.region === displayLocation)) return;
-
     fetchWeather(searchLocation).then(weather => {
       if (weather && weather.temp) {
+        // Double-check localStorage again (guards against async race)
+        if (localStorage.getItem(storageKey) === today) return;
+
+        // Also skip if there's already an active local alert for this location in state
+        const currentAlerts = useAppStore.getState().localAlerts;
+        if (currentAlerts.some(a => a.region === displayLocation)) return;
+
         const temp = Math.round(weather.temp);
         const isHot = temp >= 25;
         const isCold = temp < 15;
@@ -84,6 +87,10 @@ export function Layout({ children }: LayoutProps) {
         if (isHot) message = funnyLinesHot[Math.floor(Math.random() * funnyLinesHot.length)];
         else if (isCold) message = funnyLinesCold[Math.floor(Math.random() * funnyLinesCold.length)];
 
+        // Set localStorage BEFORE adding alert — synchronous guard prevents duplicates
+        localStorage.setItem(storageKey, today);
+        localStorage.setItem('cji-alert-date', today);
+
         addLocalAlert({
           id: `local-alert-${displayLocation}-${today}`,
           alert_type: isHot ? 'Extreme Heat' : isCold ? 'Cold Wave' : 'Weather Update',
@@ -96,13 +103,10 @@ export function Layout({ children }: LayoutProps) {
           confidence_score: 1.0,
           created_at: new Date().toISOString()
         });
-
-        // Mark this location+date as shown so it won't repeat on re-login
-        localStorage.setItem(storageKey, today);
-        localStorage.setItem('cji-alert-date', today);
       }
     });
-  }, [searchLocation, displayLocation, localAlerts, addLocalAlert]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchLocation, displayLocation]);
 
   return (
     <div className="min-h-screen bg-[#0f1117] text-slate-100 flex flex-col font-sans overflow-x-hidden relative">

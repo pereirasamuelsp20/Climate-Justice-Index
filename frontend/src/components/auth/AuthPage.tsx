@@ -252,21 +252,8 @@ export default function AuthPage() {
   const setSession = useUserStore((state) => state.setSession);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Fire verification + welcome email via backend
-  const sendWelcomeEmail = async (userEmail: string, userName: string) => {
-    try {
-      const res = await fetch('/api/v1/auth/welcome', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail, name: userName }),
-      });
-      if (!res.ok) {
-        console.error('Welcome email failed:', await res.text());
-      }
-    } catch (err) {
-      console.error('Welcome email request failed:', err);
-    }
-  };
+  // Construct backend API base URL (same logic as api/index.ts)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -275,26 +262,28 @@ export default function AuthPage() {
 
     try {
       if (isSignUp) {
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: { name },
-            emailRedirectTo: `${window.location.origin}`,
-          },
+        // Call our backend signup endpoint — this creates the user via Admin API
+        // (no ugly Supabase default email) and sends only our beautiful branded Resend email
+        const res = await fetch(`${backendUrl}/api/v1/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, name }),
         });
-        if (error) throw error;
 
-        if (data.session) {
-          // Auto-confirmed — proceed immediately
-          localStorage.setItem('supabase-auth-token', data.session.access_token);
-          setSession(data.session);
-          sendWelcomeEmail(email, name);
-        } else if (data.user && !data.session) {
-          // Email confirmation required — show beautiful check-email screen
-          sendWelcomeEmail(email, name);
-          setEmailSent(true);
+        const body = await res.json();
+
+        if (!res.ok) {
+          // Map backend error codes to user-friendly messages
+          const errMsg = body?.error?.message || 'Signup failed. Please try again.';
+          const errCode = body?.error?.code || '';
+          if (errCode === 'USER_EXISTS') {
+            throw { message: 'This email is already registered. Try logging in instead.', code: 'user_already_exists' };
+          }
+          throw { message: errMsg };
         }
+
+        // Account created — show the "check your email" screen
+        setEmailSent(true);
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
