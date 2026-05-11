@@ -63,7 +63,7 @@ export default function BarChart() {
   if (!climateData) return null;
 
   return (
-    <div className="flex flex-col h-full w-full relative">
+    <div className="flex flex-col h-full w-full relative" style={{ minHeight: 300 }}>
       <div className="flex justify-end items-center gap-3 text-xs mb-4 z-10 w-full pr-2">
         <span className="text-slate-400 font-medium">Factor:</span>
         <select 
@@ -77,7 +77,7 @@ export default function BarChart() {
         </select>
       </div>
 
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minHeight={250}>
         <ReBarChart
           data={chartData}
           margin={{ top: 20, right: 10, left: 0, bottom: 100 }}

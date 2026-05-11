@@ -27,16 +27,20 @@ authRouter.post('/signup', async (req: Request, res: Response, next: NextFunctio
     });
 
     if (createError) {
-      // Handle "user already exists" gracefully
-      if (createError.message?.includes('already been registered') || 
-          createError.message?.includes('already exists')) {
+      const errMsg = (createError.message || '').toLowerCase();
+      // Handle "user already exists" gracefully — Supabase uses varying messages
+      if (errMsg.includes('already') || errMsg.includes('exists') || errMsg.includes('registered') || errMsg.includes('duplicate') ||
+          (createError as any).status === 422) {
         res.status(409).json({ 
           error: { code: 'USER_EXISTS', message: 'This email is already registered. Try logging in instead.' }
         });
         return;
       }
-      logger.error({ error: createError, email }, 'Failed to create user');
-      throw { status: 500, code: 'AUTH_ERROR', message: createError.message };
+      logger.error({ error: createError, email }, 'Failed to create user via admin API');
+      res.status(500).json({ 
+        error: { code: 'AUTH_ERROR', message: `User creation failed: ${createError.message}` }
+      });
+      return;
     }
 
     // 2. Generate a magic link for email verification
@@ -59,23 +63,33 @@ authRouter.post('/signup', async (req: Request, res: Response, next: NextFunctio
     logger.info({ email, userId: userData.user?.id, hasLink: !!verificationLink }, 'User created via admin API');
 
     // 3. Send beautiful branded email via Resend (the ONLY email the user receives)
-    await sendVerificationEmail({
-      email,
-      name: name || '',
-      verificationLink,
-    });
+    try {
+      await sendVerificationEmail({
+        email,
+        name: name || '',
+        verificationLink,
+      });
+    } catch (emailError) {
+      // Email send failed, but user was still created — log and continue
+      logger.error({ error: emailError, email }, 'Verification email failed but user was created');
+    }
 
     res.status(201).json({ 
       message: 'Account created. Verification email sent.',
       userId: userData.user?.id,
     });
   } catch (error: any) {
-    if (error.status) {
-      res.status(error.status).json({ error: { code: error.code, message: error.message } });
+    // Zod validation errors
+    if (error.name === 'ZodError') {
+      res.status(400).json({ 
+        error: { code: 'VALIDATION_ERROR', message: 'Invalid input. Email must be valid and password must be at least 6 characters.' }
+      });
       return;
     }
     logger.error({ error }, 'Auth signup route error');
-    next(error);
+    res.status(500).json({ 
+      error: { code: 'INTERNAL_ERROR', message: error.message || 'An unexpected error occurred.' }
+    });
   }
 });
 
