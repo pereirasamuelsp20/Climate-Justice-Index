@@ -57,12 +57,13 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
     // Fetch from all three World Bank APIs in parallel (fail gracefully)
     // Using World Bank for ALL data ensures consistent, widely-recognized values
     const [emissionsResult, gdpResult, populationResult] = await Promise.allSettled([
-      // World Bank: CO2 emissions per capita (metric tons) — the standard measure
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/EN.ATM.CO2E.PC?format=json&per_page=1000&date=2018:2023&source=2'),
+      // World Bank: CO2 per capita excl. LULUCF (tCO₂e/capita) — AR5 GWP, up-to-date
+      // Old indicator EN.ATM.CO2E.PC was archived; this one has data through 2024
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/EN.GHG.CO2.PC.CE.AR5?format=json&per_page=2000&date=2019:2024'),
       // World Bank: GDP per capita (current USD)
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=1000&date=2018:2023&source=2'),
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=2000&date=2019:2024&source=2'),
       // World Bank: Total population
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=1000&date=2018:2023&source=2'),
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=2000&date=2019:2024&source=2'),
     ]);
 
     // If all APIs failed, return fallback data
