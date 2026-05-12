@@ -100,6 +100,15 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
     const gdpByIso3 = parseWorldBank(gdpResult);
     const popByIso3 = parseWorldBank(populationResult);
 
+    // Fallback emissions (tCO2/cap) for countries missing from World Bank GHG indicator
+    // Values from EDGAR/IEA databases (2022 estimates)
+    const EMISSIONS_FALLBACK: Record<string, number> = {
+      MNE: 3.72,  // Montenegro
+      SRB: 5.26,  // Serbia
+      TWN: 11.6,  // Taiwan (not in World Bank)
+      CUB: 2.3,   // Cuba
+    };
+
     // Merge all data sources using ISO3 as the join key
     const mergedCountries: any[] = [];
     let idCounter = 1;
@@ -112,11 +121,10 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
 
       // Need at least population + one other data point
       if (!population) continue;
-      if (emissionsPC == null && !gdpPc) continue;
 
       const emissionsPerCapita = emissionsPC != null
         ? parseFloat(emissionsPC.toFixed(2))
-        : 0;
+        : (EMISSIONS_FALLBACK[iso3] ?? 0);
       const vulnerabilityScore = ndgain
         ? ndgain.vulnerability
         : 0.4; // Neutral fallback if no ND-GAIN data

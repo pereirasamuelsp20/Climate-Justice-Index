@@ -24,14 +24,17 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  currentScreen: 'dashboard',
+  currentScreen: (sessionStorage.getItem('cji_screen') as Screen) || 'dashboard',
   regionFilter: null,
   alertsDrawerOpen: false,
   sidebarOpen: false,
   selectedCountry: null,
   localAlerts: [],
   dismissedAlertIds: [],
-  setCurrentScreen: (screen) => set({ currentScreen: screen }),
+  setCurrentScreen: (screen) => {
+    sessionStorage.setItem('cji_screen', screen);
+    set({ currentScreen: screen });
+  },
   setRegionFilter: (region) => set({ regionFilter: region }),
   toggleAlertsDrawer: () => set((state) => ({ alertsDrawerOpen: !state.alertsDrawerOpen })),
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
