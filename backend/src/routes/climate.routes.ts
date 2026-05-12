@@ -100,13 +100,34 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
     const gdpByIso3 = parseWorldBank(gdpResult);
     const popByIso3 = parseWorldBank(populationResult);
 
-    // Fallback emissions (tCO2/cap) for countries missing from World Bank GHG indicator
-    // Values from EDGAR/IEA databases (2022 estimates)
+    // Fallback data for countries missing from World Bank indicators
+    // Values from EDGAR/IEA/IMF databases (2022 estimates)
     const EMISSIONS_FALLBACK: Record<string, number> = {
       MNE: 3.72,  // Montenegro
       SRB: 5.26,  // Serbia
       TWN: 11.6,  // Taiwan (not in World Bank)
       CUB: 2.3,   // Cuba
+      SSD: 0.14,  // South Sudan
+      SYR: 1.0,   // Syria
+      YEM: 0.3,   // Yemen
+      SOM: 0.05,  // Somalia
+      ERI: 0.2,   // Eritrea
+      PRK: 1.2,   // North Korea (if mapped)
+      LBY: 7.5,   // Libya
+      VEN: 3.6,   // Venezuela
+    };
+
+    const GDP_FALLBACK: Record<string, number> = {
+      SSD: 420,    // South Sudan
+      SYR: 530,    // Syria
+      CUB: 9500,   // Cuba
+      TWN: 33000,  // Taiwan
+      VEN: 3700,   // Venezuela
+      ERI: 640,    // Eritrea
+      SOM: 450,    // Somalia
+      YEM: 590,    // Yemen
+      LBY: 6400,   // Libya
+      PRK: 640,    // North Korea
     };
 
     // Merge all data sources using ISO3 as the join key
@@ -119,7 +140,7 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       const population = popByIso3.get(iso3);
       const ndgain = ndgainVulnerability[iso3];
 
-      // Need at least population + one other data point
+      // Need at least population
       if (!population) continue;
 
       const emissionsPerCapita = emissionsPC != null
@@ -128,7 +149,7 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       const vulnerabilityScore = ndgain
         ? ndgain.vulnerability
         : 0.4; // Neutral fallback if no ND-GAIN data
-      const gdpPerCapita = gdpPc ? Math.round(gdpPc) : 0;
+      const gdpPerCapita = gdpPc ? Math.round(gdpPc) : (GDP_FALLBACK[iso3] ?? 0);
 
       mergedCountries.push({
         id: String(idCounter++),
