@@ -38,7 +38,7 @@ const FALLBACK_COUNTRIES = [
 ];
 
 // ─── Helper: Fetch with timeout ───
-async function fetchWithTimeout(url: string, timeoutMs = 10000): Promise<any> {
+async function fetchWithTimeout(url: string, timeoutMs = 15000): Promise<any> {
   const resp = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
   if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
   return resp.json();
@@ -59,9 +59,9 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       // Climate TRACE: total CO2 emissions by country
       fetchWithTimeout(`https://api.climatetrace.org/v6/country/emissions?since=2022&to=2023&countries=${Object.keys(ISO3_TO_COUNTRY).join(',')}`),
       // World Bank: GDP per capita (latest available year range)
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=300&date=2020:2023&source=2'),
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=1000&date=2020:2023&source=2'),
       // World Bank: Population
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=300&date=2020:2023&source=2'),
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=1000&date=2020:2023&source=2'),
     ]);
 
     // If all APIs failed, return fallback data
@@ -133,12 +133,14 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       const population = popByIso3.get(iso3);
       const ndgain = ndgainVulnerability[iso3];
 
-      // Skip countries with no useful data
-      if (!co2Tonnes && !gdpPc && !population) continue;
+      // Skip countries without population (required for per-capita calculations)
+      // Without population, emissions_per_capita would show raw tonnes (billions)
+      if (!population) continue;
+      // Also skip if we have no emissions AND no GDP data
+      if (!co2Tonnes && !gdpPc) continue;
 
-      const pop = population || 1; // Avoid division by zero
       const emissionsPerCapita = co2Tonnes
-        ? parseFloat((co2Tonnes / pop).toFixed(2))
+        ? parseFloat((co2Tonnes / population).toFixed(2))
         : 0;
       const vulnerabilityScore = ndgain
         ? ndgain.vulnerability
@@ -152,7 +154,7 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
         region: meta.region,
         emissions_per_capita: emissionsPerCapita,
         vulnerability_score: vulnerabilityScore,
-        population: pop,
+        population: population,
         gdp_per_capita: gdpPerCapita,
       });
     }
