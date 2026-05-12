@@ -7,69 +7,100 @@ import { useUserStore } from '../../store/useUserStore';
 /* ─── Storm ambient audio (local file) ─── */
 function StormAudio({ videoRef }: { videoRef: any }) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const startedRef = useRef(false);
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const audio = audioRef.current;
-    const video = videoRef.current;
     if (!audio) return;
 
-    // Detect mobile — audio-video sync causes crackling on mobile browsers
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const targetVolume = isMobile ? 0.18 : 0.4;
 
-    // Lower volume on mobile to prevent distortion from small speakers
-    audio.volume = isMobile ? 0.2 : 0.4;
-    
-    const tryPlay = () => {
-      audio.play().catch(() => {});
+    // Smooth fade-in to avoid pop/click on start
+    const fadeIn = () => {
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      audio.volume = 0;
+      fadeIntervalRef.current = setInterval(() => {
+        if (audio.volume < targetVolume - 0.02) {
+          audio.volume = Math.min(audio.volume + 0.02, targetVolume);
+        } else {
+          audio.volume = targetVolume;
+          if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+        }
+      }, 80);
     };
 
-    // Try autoplay immediately
-    tryPlay();
-    
-    // Mobile browsers require user gesture for audio — listen for touch too
+    const startAudio = () => {
+      if (startedRef.current) return;
+      // On mobile, load the audio source now (preload was "none")
+      if (isMobile && audio.preload === 'none') {
+        audio.preload = 'auto';
+        audio.load();
+      }
+      audio.play()
+        .then(() => {
+          startedRef.current = true;
+          fadeIn();
+        })
+        .catch(() => {
+          // Will retry on next user interaction
+        });
+    };
+
+    // On desktop, try autoplay immediately
+    if (!isMobile) {
+      startAudio();
+    }
+
+    // Listen for user gesture to unlock audio (required on mobile, helpful on desktop too)
     const handleInteraction = () => {
-      tryPlay();
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
+      startAudio();
+      if (startedRef.current) {
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('keydown', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+      }
     };
     document.addEventListener('click', handleInteraction);
     document.addEventListener('keydown', handleInteraction);
-    document.addEventListener('touchstart', handleInteraction);
+    document.addEventListener('touchstart', handleInteraction, { passive: true });
 
     // Only sync audio to video on desktop — mobile sync causes crackling/skipping
     let syncCleanup: (() => void) | null = null;
+    const video = videoRef.current;
     if (!isMobile && video) {
       const syncAudio = () => {
         if (audio && !audio.paused && video) {
-          // Use larger threshold to avoid constant micro-seeks
           if (Math.abs(video.currentTime - audio.currentTime) > 0.5) {
             audio.currentTime = video.currentTime;
           }
         }
       };
       video.addEventListener('seeked', syncAudio);
-      video.addEventListener('play', tryPlay);
       syncCleanup = () => {
         video.removeEventListener('seeked', syncAudio);
-        video.removeEventListener('play', tryPlay);
       };
     }
 
     return () => {
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
       document.removeEventListener('click', handleInteraction);
       document.removeEventListener('keydown', handleInteraction);
       document.removeEventListener('touchstart', handleInteraction);
       if (syncCleanup) syncCleanup();
       if (audio) { audio.pause(); audio.currentTime = 0; }
+      startedRef.current = false;
     };
   }, [videoRef]);
+
+  const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <audio
       ref={audioRef}
       loop
-      preload="auto"
+      preload={isMobile ? 'none' : 'auto'}
       src="/audio/storm_loop.mp3"
     />
   );

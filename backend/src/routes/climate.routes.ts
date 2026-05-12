@@ -1,51 +1,206 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { supabase } from '../config/supabase.js';
+// supabase import removed — countries data now sourced from live free APIs
 import { cache } from '../utils/cache.js';
+import { ISO3_TO_COUNTRY } from '../utils/countryMapping.js';
 
 export const climateRouter = Router();
 
-// GET /climate/countries
+// ─── ND-GAIN vulnerability lookup (embedded from CSV download) ───
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+let ndgainVulnerability: Record<string, { iso3: string; name: string; vulnerability: number }> = {};
+try {
+  const ndgainPath = path.join(__dirname, '../../data/ndgain_vulnerability.json');
+  if (fs.existsSync(ndgainPath)) {
+    ndgainVulnerability = JSON.parse(fs.readFileSync(ndgainPath, 'utf-8'));
+  }
+} catch (e) {
+  console.error('Failed to load ND-GAIN vulnerability data:', e);
+}
+
+// ─── Fallback data matching the ClimateData interface ───
+// Used when external APIs are unreachable (production safety net)
+const FALLBACK_COUNTRIES = [
+  { id:'1', name:'Chad',          iso2:'TD', region:'Africa',        emissions_per_capita:0.1,  vulnerability_score:0.64, population:16000000,    gdp_per_capita:700,   gdp_quartile:1 as const, emissions_share_pct:0.05, injustice_score:17.0,  composite_score:0.8120 },
+  { id:'2', name:'United States', iso2:'US', region:'North America', emissions_per_capita:14.7, vulnerability_score:0.31, population:331000000,   gdp_per_capita:63000, gdp_quartile:4 as const, emissions_share_pct:14.5, injustice_score:0.02,  composite_score:0.3180 },
+  { id:'3', name:'India',         iso2:'IN', region:'Asia',          emissions_per_capita:1.8,  vulnerability_score:0.48, population:1380000000,  gdp_per_capita:2100,  gdp_quartile:2 as const, emissions_share_pct:7.0,  injustice_score:0.09,  composite_score:0.4650 },
+  { id:'4', name:'Germany',       iso2:'DE', region:'Europe',        emissions_per_capita:8.5,  vulnerability_score:0.30, population:83000000,    gdp_per_capita:48000, gdp_quartile:4 as const, emissions_share_pct:2.1,  injustice_score:0.07,  composite_score:0.2230 },
+  { id:'5', name:'Brazil',        iso2:'BR', region:'Latin America', emissions_per_capita:2.3,  vulnerability_score:0.37, population:212000000,   gdp_per_capita:8700,  gdp_quartile:3 as const, emissions_share_pct:1.5,  injustice_score:0.30,  composite_score:0.3940 },
+  { id:'6', name:'Australia',     iso2:'AU', region:'Oceania',       emissions_per_capita:15.1, vulnerability_score:0.32, population:25000000,    gdp_per_capita:55000, gdp_quartile:4 as const, emissions_share_pct:1.2,  injustice_score:0.21,  composite_score:0.3160 },
+  { id:'7', name:'China',         iso2:'CN', region:'Asia',          emissions_per_capita:7.4,  vulnerability_score:0.38, population:1400000000,  gdp_per_capita:10500, gdp_quartile:3 as const, emissions_share_pct:28.0, injustice_score:0.01,  composite_score:0.2950 },
+  { id:'8', name:'Somalia',       iso2:'SO', region:'Africa',        emissions_per_capita:0.05, vulnerability_score:0.61, population:15000000,    gdp_per_capita:300,   gdp_quartile:1 as const, emissions_share_pct:0.02, injustice_score:44.0,  composite_score:0.9220 },
+  { id:'9', name:'Norway',        iso2:'NO', region:'Europe',        emissions_per_capita:7.2,  vulnerability_score:0.26, population:5300000,     gdp_per_capita:75000, gdp_quartile:4 as const, emissions_share_pct:0.1,  injustice_score:1.20,  composite_score:0.1580 },
+];
+
+// ─── Helper: Fetch with timeout ───
+async function fetchWithTimeout(url: string, timeoutMs = 10000): Promise<any> {
+  const resp = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  return resp.json();
+}
+
+// GET /climate/countries — Live data from Climate TRACE + World Bank + ND-GAIN
 climateRouter.get('/countries', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cacheKey = 'climate:countries';
+    const cacheKey = 'climate:countries:live';
     const cached = cache.get(cacheKey);
     if (cached) {
       res.json(cached);
       return;
     }
 
-    const { data: countries, error } = await supabase
-      .from('countries')
-      .select('*')
-      .order('name');
+    // Fetch from all three APIs in parallel (fail gracefully)
+    const [emissionsResult, gdpResult, populationResult] = await Promise.allSettled([
+      // Climate TRACE: total CO2 emissions by country
+      fetchWithTimeout('https://api.climatetrace.org/v6/country/emissions?since=2022&to=2023'),
+      // World Bank: GDP per capita (latest available year range)
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=300&date=2020:2023&source=2'),
+      // World Bank: Population
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=300&date=2020:2023&source=2'),
+    ]);
 
-    if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
+    // If all APIs failed, return fallback data
+    const emissionsOk = emissionsResult.status === 'fulfilled';
+    const gdpOk = gdpResult.status === 'fulfilled';
+    const populationOk = populationResult.status === 'fulfilled';
 
-    // Compute injustice_score = vulnerability_score / emissions_share_pct
-    // Then compute composite_score using all 5 factors (emissions, vulnerability, GDP, injustice, emissions_share)
-    const totalEmissions = countries.reduce((acc: number, c: any) => acc + (c.emissions_per_capita * c.population), 0);
-    const maxEmissions = Math.max(...countries.map((c: any) => c.emissions_per_capita));
-    const maxGdp = Math.max(...countries.map((c: any) => c.gdp_per_capita));
+    if (!emissionsOk && !gdpOk && !populationOk) {
+      console.warn('All external APIs failed, serving fallback data');
+      cache.set(cacheKey, FALLBACK_COUNTRIES, 300); // Cache fallback for 5 min only
+      res.json(FALLBACK_COUNTRIES);
+      return;
+    }
 
-    // First pass: compute injustice scores for all countries
-    const withInjustice = countries.map((c: any) => {
+    // Parse Climate TRACE emissions → Map<ISO3, co2_tonnes>
+    const emissionsByIso3 = new Map<string, number>();
+    if (emissionsOk) {
+      const emissionsData = emissionsResult.value;
+      // Response is an array of { country: "USA", emissions: { co2: number } }
+      const entries = Array.isArray(emissionsData) ? emissionsData : [emissionsData];
+      for (const entry of entries) {
+        if (entry.country && entry.country !== 'all' && entry.emissions?.co2) {
+          emissionsByIso3.set(entry.country, entry.emissions.co2);
+        }
+      }
+    }
+
+    // Parse World Bank GDP → Map<ISO3, gdp_per_capita> (latest non-null value)
+    const gdpByIso3 = new Map<string, number>();
+    if (gdpOk) {
+      const gdpData = gdpResult.value;
+      // World Bank returns [pagination, data[]]
+      const records = Array.isArray(gdpData) && gdpData.length >= 2 ? gdpData[1] : [];
+      if (Array.isArray(records)) {
+        // Sort by date descending to get latest value first
+        const sorted = [...records].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+        for (const record of sorted) {
+          const iso3 = record.countryiso3code;
+          if (iso3 && record.value != null && !gdpByIso3.has(iso3)) {
+            gdpByIso3.set(iso3, record.value);
+          }
+        }
+      }
+    }
+
+    // Parse World Bank Population → Map<ISO3, population> (latest non-null value)
+    const popByIso3 = new Map<string, number>();
+    if (populationOk) {
+      const popData = populationResult.value;
+      const records = Array.isArray(popData) && popData.length >= 2 ? popData[1] : [];
+      if (Array.isArray(records)) {
+        const sorted = [...records].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+        for (const record of sorted) {
+          const iso3 = record.countryiso3code;
+          if (iso3 && record.value != null && !popByIso3.has(iso3)) {
+            popByIso3.set(iso3, record.value);
+          }
+        }
+      }
+    }
+
+    // Merge all data sources using ISO3 as the join key
+    const mergedCountries: any[] = [];
+    let idCounter = 1;
+
+    for (const [iso3, meta] of Object.entries(ISO3_TO_COUNTRY)) {
+      const co2Tonnes = emissionsByIso3.get(iso3);
+      const gdpPc = gdpByIso3.get(iso3);
+      const population = popByIso3.get(iso3);
+      const ndgain = ndgainVulnerability[iso3];
+
+      // Skip countries with no useful data
+      if (!co2Tonnes && !gdpPc && !population) continue;
+
+      const pop = population || 1; // Avoid division by zero
+      const emissionsPerCapita = co2Tonnes
+        ? parseFloat((co2Tonnes / pop).toFixed(2))
+        : 0;
+      const vulnerabilityScore = ndgain
+        ? ndgain.vulnerability
+        : 0.4; // Neutral fallback if no ND-GAIN data
+      const gdpPerCapita = gdpPc ? Math.round(gdpPc) : 0;
+
+      mergedCountries.push({
+        id: String(idCounter++),
+        name: meta.name,
+        iso2: meta.iso2,
+        region: meta.region,
+        emissions_per_capita: emissionsPerCapita,
+        vulnerability_score: vulnerabilityScore,
+        population: pop,
+        gdp_per_capita: gdpPerCapita,
+      });
+    }
+
+    // If merge produced too few results, supplement with fallback
+    if (mergedCountries.length < 5) {
+      console.warn(`Only ${mergedCountries.length} countries merged, using fallback`);
+      cache.set(cacheKey, FALLBACK_COUNTRIES, 300);
+      res.json(FALLBACK_COUNTRIES);
+      return;
+    }
+
+    // Compute derived fields (same logic as original Supabase-backed endpoint)
+    // 1. GDP Quartiles
+    const sortedByGdp = [...mergedCountries].sort((a, b) => a.gdp_per_capita - b.gdp_per_capita);
+    const quartileSize = Math.ceil(sortedByGdp.length / 4);
+    sortedByGdp.forEach((c, i) => {
+      c.gdp_quartile = (Math.floor(i / quartileSize) + 1) as 1 | 2 | 3 | 4;
+      if (c.gdp_quartile > 4) c.gdp_quartile = 4;
+    });
+
+    // 2. Emissions share + injustice score
+    const totalEmissions = mergedCountries.reduce(
+      (acc, c) => acc + (c.emissions_per_capita * c.population), 0
+    );
+    const maxEmissions = Math.max(...mergedCountries.map(c => c.emissions_per_capita));
+    const maxGdp = Math.max(...mergedCountries.map(c => c.gdp_per_capita));
+
+    const withInjustice = mergedCountries.map(c => {
       const countryEmissions = c.emissions_per_capita * c.population;
-      const emissionsSharePct = (countryEmissions / totalEmissions) * 100;
-      const injusticeScore = emissionsSharePct > 0 ? (c.vulnerability_score / emissionsSharePct) : 0;
+      const emissionsSharePct = totalEmissions > 0
+        ? (countryEmissions / totalEmissions) * 100
+        : 0;
+      const injusticeScore = emissionsSharePct > 0
+        ? (c.vulnerability_score / emissionsSharePct)
+        : 0;
       return { ...c, emissions_share_pct: emissionsSharePct, injustice_score: injusticeScore };
     });
 
-    const maxInjustice = Math.max(...withInjustice.map((c: any) => c.injustice_score));
+    const maxInjustice = Math.max(...withInjustice.map(c => c.injustice_score));
 
-    // Second pass: compute composite using all normalized factors
-    const enrichCountries = withInjustice.map((c: any) => {
-      // Normalize all factors to 0–1 range
+    // 3. Composite score (same weighted formula as original)
+    const enrichCountries = withInjustice.map(c => {
       const normEmissions = c.emissions_per_capita / (maxEmissions || 1);
       const normVulnerability = c.vulnerability_score; // already 0–1
-      const normGdpInverse = 1 - (c.gdp_per_capita / (maxGdp || 1)); // low GDP → higher score (more vulnerable)
+      const normGdpInverse = 1 - (c.gdp_per_capita / (maxGdp || 1));
       const normInjustice = c.injustice_score / (maxInjustice || 1);
 
-      // Weighted composite — lower is better for climate justice position
       const composite = (
         normEmissions * 0.25 +
         normVulnerability * 0.25 +
@@ -61,40 +216,45 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       };
     });
 
-    cache.set(cacheKey, enrichCountries);
+    // Sort by name for consistent ordering
+    enrichCountries.sort((a: any, b: any) => a.name.localeCompare(b.name));
+
+    // Cache for 30 minutes (external data updates infrequently)
+    cache.set(cacheKey, enrichCountries, 1800);
     res.json(enrichCountries);
   } catch (error) {
     next(error);
   }
 });
 
-// GET /climate/countries/:iso2
+// GET /climate/countries/:iso2 — Single country lookup (from cached live data)
 climateRouter.get('/countries/:iso2', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { iso2 } = req.params;
-    const { data, error } = await supabase
-      .from('countries')
-      .select('*')
-      .ilike('iso2', iso2 as string)
-      .single();
-
-    if (error && error.code === 'PGRST116') {
+    
+    // Try to get from the cached countries list
+    const cacheKey = 'climate:countries:live';
+    let countries = cache.get(cacheKey) as any[] | undefined;
+    
+    // If not cached, use fallback
+    if (!countries) {
+      countries = FALLBACK_COUNTRIES;
+    }
+    
+    const country = countries.find(
+      (c: any) => c.iso2.toUpperCase() === (iso2 as string).toUpperCase()
+    );
+    
+    if (!country) {
       throw { status: 404, code: 'NOT_FOUND', message: 'Country not found' };
     }
-    if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
 
-    res.json(data);
+    res.json(country);
   } catch (error) {
     next(error);
   }
 });
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const ADMIN1_FILE = path.join(__dirname, '../../data/admin1.geojson');
 
 let admin1DataCache: any = null;
@@ -170,7 +330,7 @@ climateRouter.get('/countries/:iso2/regions', async (req: Request, res: Response
   }
 });
 
-// GET /climate/summary
+// GET /climate/summary — Derived from cached countries data
 climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const cacheKey = 'climate:summary';
@@ -180,8 +340,8 @@ climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunc
       return;
     }
 
-    const { data: countries, error } = await supabase.from('countries').select('*');
-    if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
+    // Use cached countries list or fallback
+    const countries = (cache.get('climate:countries:live') as any[] | undefined) || FALLBACK_COUNTRIES;
 
     if (!countries.length) {
       res.json({ most_vulnerable: null, highest_emitter: null, global_injustice_score: 0 });
@@ -191,10 +351,10 @@ climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunc
     let mostVulnerable = countries[0];
     let highestEmitter = countries[0];
 
-    const totalEmissions = countries.reduce((acc, c) => acc + (c.emissions_per_capita * c.population), 0);
+    const totalEmissions = countries.reduce((acc: number, c: any) => acc + (c.emissions_per_capita * c.population), 0);
     let totalInjustice = 0;
 
-    countries.forEach(c => {
+    countries.forEach((c: any) => {
       if (c.vulnerability_score > mostVulnerable.vulnerability_score) mostVulnerable = c;
       if (c.emissions_per_capita > highestEmitter.emissions_per_capita) highestEmitter = c;
 
@@ -219,12 +379,11 @@ climateRouter.get('/summary', async (req: Request, res: Response, next: NextFunc
   }
 });
 
-// GET /climate/regions
+// GET /climate/regions — Derived from cached countries data
 climateRouter.get('/regions', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { data, error } = await supabase.from('countries').select('region');
-    if (error) throw { status: 500, code: 'DB_ERROR', message: error.message };
-    const regions = Array.from(new Set(data.map(d => d.region))).sort();
+    const countries = (cache.get('climate:countries:live') as any[] | undefined) || FALLBACK_COUNTRIES;
+    const regions = Array.from(new Set(countries.map((d: any) => d.region))).sort();
     res.json(regions);
   } catch (error) {
     next(error);
