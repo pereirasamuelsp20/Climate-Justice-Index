@@ -54,14 +54,15 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       return;
     }
 
-    // Fetch from all three APIs in parallel (fail gracefully)
+    // Fetch from all three World Bank APIs in parallel (fail gracefully)
+    // Using World Bank for ALL data ensures consistent, widely-recognized values
     const [emissionsResult, gdpResult, populationResult] = await Promise.allSettled([
-      // Climate TRACE: total CO2 emissions by country
-      fetchWithTimeout(`https://api.climatetrace.org/v6/country/emissions?since=2022&to=2023&countries=${Object.keys(ISO3_TO_COUNTRY).join(',')}`),
-      // World Bank: GDP per capita (latest available year range)
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=1000&date=2020:2023&source=2'),
-      // World Bank: Population
-      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=1000&date=2020:2023&source=2'),
+      // World Bank: CO2 emissions per capita (metric tons) — the standard measure
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/EN.ATM.CO2E.PC?format=json&per_page=1000&date=2018:2023&source=2'),
+      // World Bank: GDP per capita (current USD)
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=1000&date=2018:2023&source=2'),
+      // World Bank: Total population
+      fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=1000&date=2018:2023&source=2'),
     ]);
 
     // If all APIs failed, return fallback data
@@ -76,71 +77,44 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
       return;
     }
 
-    // Parse Climate TRACE emissions → Map<ISO3, co2_tonnes>
-    const emissionsByIso3 = new Map<string, number>();
-    if (emissionsOk) {
-      const emissionsData = emissionsResult.value;
-      // Response is an array of { country: "USA", emissions: { co2: number } }
-      const entries = Array.isArray(emissionsData) ? emissionsData : [emissionsData];
-      for (const entry of entries) {
-        if (entry.country && entry.country !== 'all' && entry.emissions?.co2) {
-          emissionsByIso3.set(entry.country, entry.emissions.co2);
+    // Helper to parse World Bank indicator response → Map<ISO3, latest value>
+    const parseWorldBank = (result: PromiseSettledResult<any>): Map<string, number> => {
+      const map = new Map<string, number>();
+      if (result.status !== 'fulfilled') return map;
+      const data = result.value;
+      const records = Array.isArray(data) && data.length >= 2 ? data[1] : [];
+      if (!Array.isArray(records)) return map;
+      // Sort by date descending to get latest non-null value per country
+      const sorted = [...records].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+      for (const record of sorted) {
+        const iso3 = record.countryiso3code;
+        if (iso3 && record.value != null && !map.has(iso3)) {
+          map.set(iso3, record.value);
         }
       }
-    }
+      return map;
+    };
 
-    // Parse World Bank GDP → Map<ISO3, gdp_per_capita> (latest non-null value)
-    const gdpByIso3 = new Map<string, number>();
-    if (gdpOk) {
-      const gdpData = gdpResult.value;
-      // World Bank returns [pagination, data[]]
-      const records = Array.isArray(gdpData) && gdpData.length >= 2 ? gdpData[1] : [];
-      if (Array.isArray(records)) {
-        // Sort by date descending to get latest value first
-        const sorted = [...records].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
-        for (const record of sorted) {
-          const iso3 = record.countryiso3code;
-          if (iso3 && record.value != null && !gdpByIso3.has(iso3)) {
-            gdpByIso3.set(iso3, record.value);
-          }
-        }
-      }
-    }
-
-    // Parse World Bank Population → Map<ISO3, population> (latest non-null value)
-    const popByIso3 = new Map<string, number>();
-    if (populationOk) {
-      const popData = populationResult.value;
-      const records = Array.isArray(popData) && popData.length >= 2 ? popData[1] : [];
-      if (Array.isArray(records)) {
-        const sorted = [...records].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
-        for (const record of sorted) {
-          const iso3 = record.countryiso3code;
-          if (iso3 && record.value != null && !popByIso3.has(iso3)) {
-            popByIso3.set(iso3, record.value);
-          }
-        }
-      }
-    }
+    const emissionsByIso3 = parseWorldBank(emissionsResult); // Already per-capita (metric tons)
+    const gdpByIso3 = parseWorldBank(gdpResult);
+    const popByIso3 = parseWorldBank(populationResult);
 
     // Merge all data sources using ISO3 as the join key
     const mergedCountries: any[] = [];
     let idCounter = 1;
 
     for (const [iso3, meta] of Object.entries(ISO3_TO_COUNTRY)) {
-      const co2Tonnes = emissionsByIso3.get(iso3);
+      const emissionsPC = emissionsByIso3.get(iso3);  // Already per-capita
       const gdpPc = gdpByIso3.get(iso3);
       const population = popByIso3.get(iso3);
       const ndgain = ndgainVulnerability[iso3];
 
-      // Skip countries without population (required for per-capita calculations)
-      // Without population, emissions_per_capita would show raw tonnes (billions)
+      // Need at least population + one other data point
       if (!population) continue;
-      // Also skip if we have no emissions AND no GDP data
-      if (!co2Tonnes && !gdpPc) continue;
+      if (emissionsPC == null && !gdpPc) continue;
 
-      const emissionsPerCapita = co2Tonnes
-        ? parseFloat((co2Tonnes / population).toFixed(2))
+      const emissionsPerCapita = emissionsPC != null
+        ? parseFloat(emissionsPC.toFixed(2))
         : 0;
       const vulnerabilityScore = ndgain
         ? ndgain.vulnerability
