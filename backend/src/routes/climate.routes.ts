@@ -57,7 +57,7 @@ climateRouter.get('/countries', async (req: Request, res: Response, next: NextFu
     // Fetch from all three APIs in parallel (fail gracefully)
     const [emissionsResult, gdpResult, populationResult] = await Promise.allSettled([
       // Climate TRACE: total CO2 emissions by country
-      fetchWithTimeout('https://api.climatetrace.org/v6/country/emissions?since=2022&to=2023'),
+      fetchWithTimeout(`https://api.climatetrace.org/v6/country/emissions?since=2022&to=2023&countries=${Object.keys(ISO3_TO_COUNTRY).join(',')}`),
       // World Bank: GDP per capita (latest available year range)
       fetchWithTimeout('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=300&date=2020:2023&source=2'),
       // World Bank: Population
