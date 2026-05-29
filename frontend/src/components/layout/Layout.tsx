@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { AlertsDrawer } from './AlertsDrawer';
@@ -108,28 +108,44 @@ export function Layout({ children }: LayoutProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchLocation, displayLocation]);
 
+  const [isMobile] = useState(() =>
+    typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+  );
+
   return (
     <div className="min-h-screen bg-[#0f1117] text-slate-100 flex flex-col font-sans overflow-x-hidden relative">
-      {/* Atmospheric Video Background */}
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        className="fixed inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen pointer-events-none"
-        style={{ willChange: 'transform', transform: 'translateZ(0)' }}
-      >
-        <source src="/bg_video.mp4" type="video/mp4" />
-      </video>
+      {/* Background: Video on desktop, static gradient on mobile (prevents mix-blend-screen jank) */}
+      {!isMobile ? (
+        <>
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="fixed inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen pointer-events-none"
+            style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+          >
+            <source src="/bg_video.mp4" type="video/mp4" />
+          </video>
 
-      {/* Global gradient overlay for readability */}
-      <div className="fixed inset-0 bg-linear-to-b from-[#0c0e14]/60 via-[#0c0e14]/40 to-[#0c0e14]/80 z-0 pointer-events-none" />
+          {/* Global gradient overlay for readability */}
+          <div className="fixed inset-0 bg-linear-to-b from-[#0c0e14]/60 via-[#0c0e14]/40 to-[#0c0e14]/80 z-0 pointer-events-none" />
+        </>
+      ) : (
+        /* Mobile: lightweight static gradient instead of GPU-heavy video */
+        <div
+          className="fixed inset-0 z-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(180deg, #0c0e14 0%, #111422 40%, #0f1117 100%)',
+          }}
+        />
+      )}
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col min-h-screen w-full" style={{ WebkitOverflowScrolling: 'touch' as any, touchAction: 'manipulation' }}>
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
         <Header />
         
-        <main className="flex-1 w-full relative overflow-y-auto">
+        <main className="flex-1 w-full relative">
           <div className="mx-auto max-w-7xl p-4 md:p-8">
             {children}
           </div>

@@ -107,7 +107,14 @@
   html, body {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    touch-action: manipulation;
+    /* Let page body be the scroll container — not a nested flex child */
+    height: auto !important;
+    min-height: 100dvh;
+  }
+  /* Reduce expensive backdrop-filter on sticky header during scroll */
+  header {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
   }
   /* Prevent fixed backgrounds from blocking scroll on iOS */
   .fixed {

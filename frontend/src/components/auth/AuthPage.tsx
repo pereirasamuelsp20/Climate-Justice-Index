@@ -4,18 +4,22 @@ import { AlertCircle, ArrowRight, Eye, EyeOff, Mail, CheckCircle2, Sparkles } fr
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserStore } from '../../store/useUserStore';
 
-/* ─── Storm ambient audio (local file) ─── */
+const IS_MOBILE = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+/* ─── Storm ambient audio (local file) — desktop only ─── */
 function StormAudio({ videoRef }: { videoRef: any }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const startedRef = useRef(false);
   const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
+    // Completely skip audio on mobile — prevents clutter, crackling, and main-thread jank
+    if (IS_MOBILE) return;
+
     const audio = audioRef.current;
     if (!audio) return;
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const targetVolume = isMobile ? 0.18 : 0.4;
+    const targetVolume = 0.4;
 
     // Smooth fade-in to avoid pop/click on start
     const fadeIn = () => {
@@ -33,11 +37,6 @@ function StormAudio({ videoRef }: { videoRef: any }) {
 
     const startAudio = () => {
       if (startedRef.current) return;
-      // On mobile, load the audio source now (preload was "none")
-      if (isMobile && audio.preload === 'none') {
-        audio.preload = 'auto';
-        audio.load();
-      }
       audio.play()
         .then(() => {
           startedRef.current = true;
@@ -48,28 +47,24 @@ function StormAudio({ videoRef }: { videoRef: any }) {
         });
     };
 
-    // On desktop, try autoplay immediately
-    if (!isMobile) {
-      startAudio();
-    }
+    // Desktop: try autoplay immediately
+    startAudio();
 
-    // Listen for user gesture to unlock audio (required on mobile, helpful on desktop too)
+    // Fallback: user gesture to unlock audio on desktop if autoplay blocked
     const handleInteraction = () => {
       startAudio();
       if (startedRef.current) {
         document.removeEventListener('click', handleInteraction);
         document.removeEventListener('keydown', handleInteraction);
-        document.removeEventListener('touchstart', handleInteraction);
       }
     };
     document.addEventListener('click', handleInteraction);
     document.addEventListener('keydown', handleInteraction);
-    document.addEventListener('touchstart', handleInteraction, { passive: true });
 
-    // Only sync audio to video on desktop — mobile sync causes crackling/skipping
+    // Sync audio to video on desktop
     let syncCleanup: (() => void) | null = null;
     const video = videoRef.current;
-    if (!isMobile && video) {
+    if (video) {
       const syncAudio = () => {
         if (audio && !audio.paused && video) {
           if (Math.abs(video.currentTime - audio.currentTime) > 0.5) {
@@ -87,20 +82,20 @@ function StormAudio({ videoRef }: { videoRef: any }) {
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
       document.removeEventListener('click', handleInteraction);
       document.removeEventListener('keydown', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
       if (syncCleanup) syncCleanup();
       if (audio) { audio.pause(); audio.currentTime = 0; }
       startedRef.current = false;
     };
   }, [videoRef]);
 
-  const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // Don't even mount the <audio> element on mobile
+  if (IS_MOBILE) return null;
 
   return (
     <audio
       ref={audioRef}
       loop
-      preload={isMobile ? 'none' : 'auto'}
+      preload="auto"
       src="/audio/storm_loop.mp3"
     />
   );

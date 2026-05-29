@@ -6,6 +6,8 @@ interface StormTransitionProps {
   onComplete: () => void;
 }
 
+const IS_MOBILE = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 export default function StormTransition({ onComplete }: StormTransitionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -19,45 +21,35 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
     const audio = audioRef.current;
     if (!video) return;
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
     // Start video
     video.play().catch(() => { });
 
-    // Start calming ocean audio with smooth fade-in
-    const startAudio = () => {
-      if (!audio) return;
-      // On mobile, load the audio source now (preload was "none")
-      if (isMobile && audio.preload === 'none') {
-        audio.preload = 'auto';
-        audio.load();
-      }
-      audio.volume = 0;
-      audio.play().then(() => {
-        // Smooth fade-in to target volume
-        let vol = 0;
-        const targetVol = isMobile ? 0.2 : 0.35;
-        const fadeIn = setInterval(() => {
-          vol = Math.min(vol + 0.015, targetVol);
-          if (audio) audio.volume = vol;
-          if (vol >= targetVol) clearInterval(fadeIn);
-        }, 100);
-      }).catch(() => { });
-    };
+    // Audio: desktop only — skip entirely on mobile to prevent clutter
+    if (!IS_MOBILE && audio) {
+      const startAudio = () => {
+        audio.volume = 0;
+        audio.play().then(() => {
+          // Smooth fade-in to target volume
+          let vol = 0;
+          const targetVol = 0.35;
+          const fadeIn = setInterval(() => {
+            vol = Math.min(vol + 0.015, targetVol);
+            if (audio) audio.volume = vol;
+            if (vol >= targetVol) clearInterval(fadeIn);
+          }, 100);
+        }).catch(() => { });
+      };
 
-    // On desktop, start audio immediately; on mobile, wait for gesture
-    if (!isMobile) {
+      // Desktop: start audio immediately
       startAudio();
+
+      // Fallback gesture listener for desktop autoplay policy
+      const handleInteraction = () => {
+        startAudio();
+        document.removeEventListener('click', handleInteraction);
+      };
+      document.addEventListener('click', handleInteraction);
     }
-
-    // User gesture listener for mobile audio unlock
-    const handleInteraction = () => {
-      startAudio();
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
-    };
-    document.addEventListener('click', handleInteraction);
-    document.addEventListener('touchstart', handleInteraction, { passive: true });
 
     // Show text after 1.5s
     const textTimer = setTimeout(() => setShowText(true), 1500);
@@ -65,8 +57,8 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
     // Handle video end — we let it play once fully then fade
     const handleEnded = () => {
       setPhase('fading');
-      // Fade audio out
-      if (audio) {
+      // Fade audio out (desktop only)
+      if (!IS_MOBILE && audio) {
         let vol = audio.volume;
         const fadeOut = setInterval(() => {
           vol = Math.max(vol - 0.03, 0);
@@ -93,8 +85,6 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
       clearTimeout(textTimer);
       clearTimeout(safetyTimer);
       video.removeEventListener('ended', handleEnded);
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
       if (audio) {
         audio.pause();
         audio.currentTime = 0;
@@ -102,7 +92,7 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
     };
   }, [onComplete]);
 
-  const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 
   return (
     <AnimatePresence>
@@ -118,7 +108,7 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover storm-video-bg"
-            muted={false}
+            muted={IS_MOBILE}
             playsInline
             preload="auto"
             src="/storm_clearing.mp4"
@@ -147,13 +137,15 @@ export default function StormTransition({ onComplete }: StormTransitionProps) {
             )}
           </AnimatePresence>
 
-          {/* Calming ocean audio — local file */}
-          <audio
-            ref={audioRef}
-            preload={isMobile ? 'none' : 'auto'}
-            loop
-            src="/audio/ocean_calm.mp3"
-          />
+          {/* Calming ocean audio — desktop only */}
+          {!IS_MOBILE && (
+            <audio
+              ref={audioRef}
+              preload="auto"
+              loop
+              src="/audio/ocean_calm.mp3"
+            />
+          )}
         </motion.div>
       ) : (
         <motion.div
