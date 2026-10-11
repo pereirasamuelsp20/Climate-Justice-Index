@@ -15,12 +15,12 @@ import InitiativesScreen from './components/screens/InitiativesScreen';
 import CompletedInitiativesScreen from './components/screens/CompletedInitiativesScreen';
 import HotspotMapScreen from './components/screens/HotspotMapScreen';
 
-type AppPhase = 'auth' | 'transition' | 'dashboard';
+type AppPhase = 'loading' | 'auth' | 'transition' | 'dashboard';
 
 function App() {
   const { session, isLoadingAuth, setSession, setLoadingAuth } = useUserStore();
   const currentScreen = useAppStore((state) => state.currentScreen);
-  const [phase, setPhase] = useState<AppPhase>('auth');
+  const [phase, setPhase] = useState<AppPhase>('loading');
   const [prevSession, setPrevSession] = useState(session);
 
   useEffect(() => {
@@ -29,9 +29,11 @@ function App() {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setLoadingAuth(false);
-      // If already logged in on load, skip transition
+      // If already logged in on load, skip transition — go straight to dashboard
       if (session) {
         setPhase('dashboard');
+      } else {
+        setPhase('auth');
       }
     });
 
@@ -60,24 +62,24 @@ function App() {
 
   // Detect fresh login (session transitions from null → valid)
   useEffect(() => {
-    if (!prevSession && session) {
+    if (!prevSession && session && phase === 'auth') {
       // Fresh login → show storm transition and reset to dashboard
       setPhase('transition');
       useUserStore.getState().setHasSeenOnboarding(false);
       useAppStore.getState().setCurrentScreen('dashboard');
-    } else if (!session) {
+    } else if (!session && phase !== 'loading') {
       setPhase('auth');
       // Reset to dashboard so next login starts fresh
       useAppStore.getState().setCurrentScreen('dashboard');
     }
     setPrevSession(session);
-  }, [session, prevSession]);
+  }, [session, prevSession, phase]);
 
   const handleTransitionComplete = useCallback(() => {
     setPhase('dashboard');
   }, []);
 
-  if (isLoadingAuth) {
+  if (isLoadingAuth || phase === 'loading') {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-[#0f1117]">
         <div className="flex flex-col items-center gap-4">

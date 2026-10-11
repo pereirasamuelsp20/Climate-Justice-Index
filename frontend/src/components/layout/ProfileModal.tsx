@@ -4,7 +4,7 @@ import { useUserStore } from '../../store/useUserStore';
 import { useAppStore } from '../../store/useAppStore';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 import { Button } from '../ui/button';
-import { Camera, Loader2 } from 'lucide-react';
+import { Camera, Loader2, Eye, EyeOff } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { AutocompleteInput } from '../ui/AutocompleteInput';
 import { Country, State } from 'country-state-city';
@@ -68,6 +68,8 @@ interface ProfileModalProps {
 export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
   const session = useUserStore((state) => state.session);
   const addLocalAlert = useAppStore((state) => state.addLocalAlert);
+  const showDisplayIcon = useUserStore((state) => state.preferences.showDisplayIcon);
+  const toggleDisplayIcon = useUserStore((state) => state.toggleDisplayIcon);
   const user = session?.user;
   const metadata = user?.user_metadata || {};
 
@@ -203,7 +205,7 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-[#161923] border border-white/10 text-white">
+      <DialogContent className="sm:max-w-md max-w-[92vw] bg-[#161923] border border-white/10 text-white">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Edit Profile</DialogTitle>
           <DialogDescription className="text-slate-400">
@@ -238,6 +240,38 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
             <span className="text-xs text-slate-500">Click avatar to change</span>
           </div>
 
+          {/* Display Icon Toggle */}
+          <div className="flex items-center justify-between p-3 rounded-xl bg-white/4 border border-white/8">
+            <div className="flex items-center gap-3">
+              {showDisplayIcon ? (
+                <Eye className="w-4 h-4 text-blue-400" />
+              ) : (
+                <EyeOff className="w-4 h-4 text-slate-500" />
+              )}
+              <div>
+                <span className="text-sm font-medium text-slate-200 block">Show Display Icon</span>
+                <span className="text-[11px] text-slate-500">
+                  {showDisplayIcon ? 'Your avatar is visible in the header' : 'Avatar hidden — showing generic icon'}
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={showDisplayIcon}
+              onClick={toggleDisplayIcon}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 cursor-pointer ${
+                showDisplayIcon ? 'bg-blue-600' : 'bg-slate-700'
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
+                  showDisplayIcon ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+          </div>
+
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-300">Name</label>
@@ -261,7 +295,7 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <AutocompleteInput
                 label="Country"
                 value={country}

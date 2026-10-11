@@ -125,6 +125,84 @@
   main {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+
+  /* ─── Mobile Dashboard ─── */
+  /* Quick action cards: 1 column on mobile */
+  .grid.lg\:grid-cols-5 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce card padding on mobile */
+  .backdrop-blur-md {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  /* ─── Mobile Map ─── */
+  /* Ensure map fills available space on mobile */
+  .min-h-\[600px\] {
+    min-height: 350px !important;
+  }
+
+  /* ─── Mobile Tables ─── */
+  /* Horizontal scroll for tables */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    font-size: 13px;
+  }
+  table th, table td {
+    padding: 8px 10px !important;
+  }
+
+  /* ─── Mobile Dialogs ─── */
+  /* Dialogs/modals take full width on mobile */
+  [data-state="open"][role="dialog"] {
+    max-width: 95vw !important;
+    width: 95vw !important;
+    max-height: 85vh !important;
+  }
+
+  /* ─── Mobile Typography ─── */
+  h1 {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* ─── Reduce motion on mobile for performance ─── */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ─── Timeline horizontal scroll on mobile ─── */
+  .overflow-x-auto {
+    scrollbar-width: thin;
+  }
+
+  /* ─── Metric cards on mobile ─── */
+  .metric-card {
+    padding: 12px;
+  }
+  .metric-card:hover {
+    transform: none;
+  }
+
+  /* ─── Before/After grid on mobile ─── */
+  .grid.grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ─── Glass cards on mobile ─── */
+  .glass-card {
+    backdrop-filter: blur(12px) saturate(1.1) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+    padding: 24px !important;
+  }
 }
 
 /* ─── GPU-accelerated animation helpers ─── */

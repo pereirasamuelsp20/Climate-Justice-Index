@@ -11,6 +11,7 @@ export interface User {
 interface UserPreferences {
   currentRegion: string | null;
   recentCountries: string[];
+  showDisplayIcon: boolean;
 }
 
 interface UserState {
@@ -25,6 +26,7 @@ interface UserState {
   setHasSeenOnboarding: (seen: boolean) => void;
   setPreferences: (prefs: Partial<UserPreferences>) => void;
   addRecentCountry: (country: string) => void;
+  toggleDisplayIcon: () => void;
 }
 
 export const useUserStore = create<UserState>()(
@@ -37,6 +39,7 @@ export const useUserStore = create<UserState>()(
       preferences: {
         currentRegion: null,
         recentCountries: [],
+        showDisplayIcon: true,
       },
       setUser: (user) => set({ user }),
       setSession: (session) => set({ session }),
@@ -56,9 +59,20 @@ export const useUserStore = create<UserState>()(
             ].slice(0, 5),
           },
         })),
+      toggleDisplayIcon: () =>
+        set((state) => ({
+          preferences: {
+            ...state.preferences,
+            showDisplayIcon: !state.preferences.showDisplayIcon,
+          },
+        })),
     }),
     {
       name: 'climate-justice-user-store',
+      partialize: (state) => ({
+        hasSeenOnboarding: state.hasSeenOnboarding,
+        preferences: state.preferences,
+      }),
     }
   )
 );

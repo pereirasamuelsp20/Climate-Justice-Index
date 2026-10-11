@@ -1,10 +1,87 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, useRef, type ReactNode } from 'react';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { AlertsDrawer } from './AlertsDrawer';
 import { useUserStore } from '../../store/useUserStore';
 import { useAppStore } from '../../store/useAppStore';
 import { fetchWeather } from '../../api';
+
+const IS_MOBILE = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+/* ─── Subtle ambient audio for the dashboard — desktop only ─── */
+function AmbientAudio() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const startedRef = useRef(false);
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (IS_MOBILE) return;
+
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    // Very low volume — background presence, not prominent
+    const targetVolume = 0.06;
+
+    const fadeIn = () => {
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      audio.volume = 0;
+      fadeIntervalRef.current = setInterval(() => {
+        if (audio.volume < targetVolume - 0.005) {
+          audio.volume = Math.min(audio.volume + 0.005, targetVolume);
+        } else {
+          audio.volume = targetVolume;
+          if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+        }
+      }, 150);
+    };
+
+    const startAudio = () => {
+      if (startedRef.current) return;
+      audio.play()
+        .then(() => {
+          startedRef.current = true;
+          fadeIn();
+        })
+        .catch(() => {
+          // Will retry on next user interaction
+        });
+    };
+
+    // Try autoplay immediately
+    startAudio();
+
+    // Fallback: user gesture to unlock audio
+    const handleInteraction = () => {
+      startAudio();
+      if (startedRef.current) {
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('keydown', handleInteraction);
+      }
+    };
+    document.addEventListener('click', handleInteraction);
+    document.addEventListener('keydown', handleInteraction);
+
+    return () => {
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+      if (audio) { audio.pause(); audio.currentTime = 0; }
+      startedRef.current = false;
+    };
+  }, []);
+
+  if (IS_MOBILE) return null;
+
+  return (
+    <audio
+      ref={audioRef}
+      loop
+      preload="auto"
+      src="/audio/ocean_calm.mp3"
+    />
+  );
+}
 
 interface LayoutProps {
   children: ReactNode;
@@ -114,6 +191,9 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-[#0f1117] text-slate-100 flex flex-col font-sans overflow-x-hidden relative">
+      {/* Ambient Audio — desktop only, very low volume */}
+      <AmbientAudio />
+
       {/* Background: Video on desktop, static gradient on mobile (prevents mix-blend-screen jank) */}
       {!isMobile ? (
         <>
@@ -146,7 +226,7 @@ export function Layout({ children }: LayoutProps) {
         <Header />
         
         <main className="flex-1 w-full relative">
-          <div className="mx-auto max-w-7xl p-4 md:p-8">
+          <div className="mx-auto max-w-7xl p-3 md:p-8">
             {children}
           </div>
         </main>

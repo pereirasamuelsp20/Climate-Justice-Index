@@ -84,7 +84,7 @@ export function WelcomeModal() {
               exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
             >
               <motion.div
-                className="text-2xl md:text-3xl font-medium tracking-tight text-white leading-relaxed max-w-sm"
+                className="text-xl md:text-3xl font-medium tracking-tight text-white leading-relaxed max-w-sm"
                 variants={container}
                 initial="hidden"
                 animate="visible"

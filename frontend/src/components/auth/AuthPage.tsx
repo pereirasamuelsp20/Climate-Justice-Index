@@ -335,7 +335,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-[#030508]">
+    <div className="relative h-screen h-[100dvh] w-full overflow-hidden flex items-center justify-center bg-[#030508]">
       {/* ─── Storm Audio ─── */}
       <StormAudio videoRef={videoRef} />
 
@@ -381,9 +381,9 @@ export default function AuthPage() {
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -20, filter: 'blur(6px)' }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full max-w-[400px] mx-4"
+            className="relative z-10 w-full max-w-[400px] mx-3 md:mx-4 max-h-[90dvh] overflow-y-auto"
           >
-            <div className="rounded-2xl p-8 shadow-2xl"
+            <div className="rounded-2xl p-6 md:p-8 shadow-2xl"
               style={{
                 background: 'rgba(5, 8, 14, 0.55)',
                 backdropFilter: 'blur(30px) saturate(1.3)',

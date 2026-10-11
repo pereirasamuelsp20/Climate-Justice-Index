@@ -340,7 +340,7 @@ export default function HotspotMapScreen() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="flex-1 min-h-[600px] relative rounded-2xl overflow-hidden border border-white/6 shadow-xl"
+        className="flex-1 min-h-[350px] md:min-h-[600px] relative rounded-2xl overflow-hidden border border-white/6 shadow-xl"
       >
         {isLoading && (
           <div className="absolute inset-0 z-20 bg-[#0c0e14]/80 backdrop-blur-sm flex items-center justify-center">
