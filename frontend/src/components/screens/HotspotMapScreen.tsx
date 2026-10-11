@@ -17,6 +17,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
+const CARTO_API_KEY = import.meta.env.VITE_CARTO_API_KEY || 'cb1_4grq_1_aeebe0621c5b43a05b62a1be';
+
 function MapEffects() {
   const map = useMap();
   useEffect(() => {
@@ -416,7 +418,7 @@ export default function HotspotMapScreen() {
                 <MapEffects />
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                  url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                  url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`}
                 />
 
                 {geoJsonData && (
